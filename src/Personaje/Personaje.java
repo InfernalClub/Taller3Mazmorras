@@ -1,0 +1,98 @@
+package Personaje;
+
+public abstract class Personaje {
+    private String Nombre;
+    private String Descripcion;
+    private int Nivel;
+    private int Vida;
+    private int Ataque;
+    private int Defensa;
+    private int Velocidad;
+    private int Experiencia;
+    private boolean Estado;
+
+    public Personaje(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, boolean estado) {
+        Nombre = nombre;
+        Descripcion = descripcion;
+        Nivel = nivel;
+        Vida = vida;
+        Ataque = ataque;
+        Defensa = defensa;
+        Velocidad = velocidad;
+        Experiencia = experiencia;
+        Estado = estado;
+    }
+
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String nombre) {
+        Nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return Descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        Descripcion = descripcion;
+    }
+
+    public int getNivel() {
+        return Nivel;
+    }
+
+    public void setNivel(int nivel) {
+        Nivel = nivel;
+    }
+
+    public int getVida() {
+        return Vida;
+    }
+
+    public void setVida(int vida) {
+        Vida = vida;
+    }
+
+    public int getAtaque() {
+        return Ataque;
+    }
+
+    public void setAtaque(int ataque) {
+        Ataque = ataque;
+    }
+
+    public int getDefensa() {
+        return Defensa;
+    }
+
+    public void setDefensa(int defensa) {
+        Defensa = defensa;
+    }
+
+    public int getVelocidad() {
+        return Velocidad;
+    }
+
+    public void setVelocidad(int velocidad) {
+        Velocidad = velocidad;
+    }
+
+    public int getExperiencia() {
+        return Experiencia;
+    }
+
+    public void setExperiencia(int experiencia) {
+        Experiencia = experiencia;
+    }
+
+    public boolean isEstado() {
+        return Estado;
+    }
+
+    public void setEstado(boolean estado) {
+        Estado = estado;
+    }
+}
