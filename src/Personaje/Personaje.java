@@ -9,10 +9,10 @@ public abstract class Personaje {
     private int Defensa;
     private int Velocidad;
     private int Experiencia;
-    private boolean Estado;
+    private String Estado;
     private String AtaqueEspecial;
 
-    public Personaje(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, boolean estado, String AtaqueEspecial) {
+    public Personaje(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, String estado, String AtaqueEspecial) {
         Nombre = nombre;
         Descripcion = descripcion;
         Nivel = nivel;
@@ -90,11 +90,11 @@ public abstract class Personaje {
         Experiencia = experiencia;
     }
 
-    public boolean isEstado() {
+    public String isEstado() {
         return Estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(String estado) {
         Estado = estado;
     }
 
