@@ -4,6 +4,8 @@ import Personaje.Personaje;
 import ucn.StdIn;
 import ucn.StdOut;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class InterfaseJuegoImpl implements InterfaseJuego {
 
     Personaje nuevoPersonaje;
@@ -219,4 +221,11 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         }
         return true;
     }
+
+    public static int Randomizer()
+    {
+        int randomNumber = ThreadLocalRandom.current().nextInt(0,   4);
+        return randomNumber;
+    }
+
 }
