@@ -2,18 +2,23 @@ package Personaje;
 
 public class Arquero extends Personaje {
 
-    private String AtaqueRapido;
+    private String AtaqueMultiple;
 
-    public Arquero (String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, boolean estado) {
-        super(nombre, descripcion, nivel, vida, ataque, defensa, velocidad, experiencia, estado);
+    public Arquero (String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, boolean estado, String AtaqueEspecial) {
+        super(nombre, descripcion, nivel, vida, ataque, defensa, velocidad, experiencia, estado, AtaqueEspecial);
     }
 
 
-    public String getAtaqueRapido() {
-        return AtaqueRapido;
+    public String getAtaqueMultiple() {
+        return AtaqueMultiple;
     }
 
-    public void setAtaqueRapido(String ataqueRapido) {
-        AtaqueRapido = ataqueRapido;
+    public void setAtaqueMultiple(String ataqueMultiple) {
+        AtaqueMultiple = ataqueMultiple;
+    }
+
+    @Override
+    public void setAtaqueEspecial(String ataqueEspecial) {
+        super.setAtaqueEspecial(AtaqueMultiple);
     }
 }

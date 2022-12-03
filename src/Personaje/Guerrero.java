@@ -6,8 +6,8 @@ public class Guerrero extends Personaje {
 
     private String AtaqueDoble;
 
-    public Guerrero(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, boolean estado) {
-        super(nombre, descripcion, nivel, vida, ataque, defensa, velocidad, experiencia, estado);
+    public Guerrero(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, boolean estado, String AtaqueEspecial) {
+        super(nombre, descripcion, nivel, vida, ataque, defensa, velocidad, experiencia, estado, AtaqueEspecial);
     }
 
     public String getAtaqueDoble() {
@@ -16,5 +16,10 @@ public class Guerrero extends Personaje {
 
     public void setAtaqueDoble(String ataqueDoble) {
         AtaqueDoble = ataqueDoble;
+    }
+
+    @Override
+    public void setAtaqueEspecial(String ataqueEspecial) {
+        super.setAtaqueEspecial(AtaqueDoble);
     }
 }

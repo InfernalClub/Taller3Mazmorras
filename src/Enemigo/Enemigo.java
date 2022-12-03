@@ -4,21 +4,23 @@ public abstract class Enemigo  {
     private String Nombre;
     private String Descripcion;
     private int Nivel;
-    private int Vida;
-    private int Ataque;
-    private int Defensa;
+    private int Vida ;
+    private int Ataque ;
+    private int Defensa ;
     private int Velocidad;
     private int Experiencia;
     private boolean Estado;
 
-    public Enemigo(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, boolean estado) {
+    private String AtaqueEspecial;
+
+    public Enemigo(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, boolean estado, String AtaqueEspecial) {
         Nombre = nombre;
         Descripcion = descripcion;
         Nivel = nivel;
-        Vida = vida;
-        Ataque = ataque;
-        Defensa = defensa;
-        Velocidad = velocidad;
+        Vida = 110;
+        Ataque = 25;
+        Defensa = 10;
+        Velocidad = 25;
         Experiencia = experiencia;
         Estado = estado;
     }
@@ -93,5 +95,13 @@ public abstract class Enemigo  {
 
     public void setEstado(boolean estado) {
         Estado = estado;
+    }
+
+    public String getAtaqueEspecial() {
+        return AtaqueEspecial;
+    }
+
+    public void setAtaqueEspecial(String ataqueEspecial) {
+        AtaqueEspecial = ataqueEspecial;
     }
 }
