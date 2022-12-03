@@ -1,5 +1,8 @@
 package Juego;
 
+import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
+
 public class InterfaseJuegoImpl implements InterfaseJuego {
 
     @Override
@@ -9,6 +12,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     @Override
     public void MenuPrincipal() {
+
 
     }
 
@@ -44,11 +48,19 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     @Override
     public int AtacarPersonaje() {
+
+        //AtaqueResultante = Ataque * Efectividad;
+        //return AtaqueResultante;
+
+
+
         return 0;
     }
 
     @Override
     public int AtacarEnemigo() {
+
+        //AtaqueEnemigo;
         return 0;
     }
 
@@ -75,5 +87,12 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     @Override
     public void Salir() {
 
+    }
+
+
+    public int Randomizer()
+    {
+        int randomNumber = ThreadLocalRandom.current().nextInt(0,   4);
+        return randomNumber;
     }
 }

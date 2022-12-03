@@ -21,7 +21,7 @@ public abstract class Enemigo  {
         Ataque = 25;
         Defensa = 10;
         Velocidad = 25;
-        Experiencia = experiencia;
+        Experiencia = 0;
         Estado = estado;
     }
 
@@ -81,13 +81,6 @@ public abstract class Enemigo  {
         Velocidad = velocidad;
     }
 
-    public int getExperiencia() {
-        return Experiencia;
-    }
-
-    public void setExperiencia(int experiencia) {
-        Experiencia = experiencia;
-    }
 
     public boolean isEstado() {
         return Estado;
