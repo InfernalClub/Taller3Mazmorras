@@ -14,7 +14,7 @@ public interface InterfaseJuego {
     int AtaqueEspecialPersonaje();
     int AtaqueEspecialEnemigo();
     int Efectos();
-    void Defender();
+    int Defender();
     void Salir();
 
 }

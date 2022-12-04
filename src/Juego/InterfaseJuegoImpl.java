@@ -1,17 +1,14 @@
 package Juego;
 
-import Enemigo.Enemigo;
 import Personaje.Personaje;
 import ucn.StdIn;
 import ucn.StdOut;
 
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class InterfaseJuegoImpl implements InterfaseJuego {
 
     Personaje nuevoPersonaje;
-    Enemigo enemigo;
 
     @Override
     public void Iniciar() {
@@ -83,39 +80,21 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         StdOut.println("GUERRERO");
         StdOut.println("ARQUERO");
         StdOut.println("MAGO");
-        try
-        {
-            String opcion = StdIn.readLine();
-            int decision;
-            if (isNumeric(opcion)) Integer.parseInt(opcion);
-            decision = Integer.parseInt(opcion);
-            switch (decision)
-            {
-                case 1:
-                    // nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,true,"Ataque Doble");
-                    break;
+        String claseEscogida = StdIn.readString();
 
-                case 2:
-                    // nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,true,"Ataque Rapido");
-                    break;
-
-                case 3:
-                    // nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,true,"Regeneracion");
-                    break;
-                default:
-                    StdOut.println("Ingrese una opcion de la lista: ");
-                    MenuPrincipal();
-
-
-            }
+        if (claseEscogida.equalsIgnoreCase("Guerreo")){
 
         }
-        catch (Exception e) {
-            StdOut.println("Ingrese una opción válida.");
-            MenuPrincipal();
+        if (claseEscogida.equalsIgnoreCase("Arquero")){
+
+        }
+        if (claseEscogida.equalsIgnoreCase("Mago")){
+
+        }else {
+            StdOut.println("Error, ingrese una opcion correcta");
         }
 
-
+       // nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,true,"Regeneracion");
 
     }
 
@@ -186,18 +165,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     @Override
     public void VerPersonaje() {
-        StdOut.println("-------------->FINAL DUNGEONS<--------------");
-        StdOut.println("[*] Perfil de "+nuevoPersonaje.getNombre()+" [*]");
-        StdOut.println("");
-        StdOut.println("");
-        StdOut.println("[Nivel]: "+nuevoPersonaje.getNivel());
-        StdOut.println("[Vida]: "+nuevoPersonaje.getVida());
-        StdOut.println("[Ataque]: "+nuevoPersonaje.getAtaque());
-        StdOut.println("[Defensa]: "+nuevoPersonaje.getDefensa());
-        StdOut.println("[Velocidad]: "+nuevoPersonaje.getVelocidad());
-        StdOut.println("");
-        StdOut.println("");
-        StdOut.println("--------------------------------------------");
+
     }
 
     @Override
@@ -207,8 +175,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     @Override
     public int AtacarPersonaje() {
-       return -1;
-
+        return 0;
     }
 
     @Override
@@ -232,10 +199,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     }
 
     @Override
-    public void Defender() {
-        StdOut.println("Ataque defendido");
-
-        StdOut.println("El enemigo se defendio de tu ataque");
+    public int Defender() {
+        return 0;
     }
 
     @Override

@@ -8,11 +8,12 @@ public abstract class Enemigo  {
     private int Ataque ;
     private int Defensa ;
     private int Velocidad;
+    private int Experiencia;
     private String Estado;
 
     private String AtaqueEspecial;
 
-    public Enemigo(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, String estado, String AtaqueEspecial) {
+    public Enemigo(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, String estado, String AtaqueEspecial) {
         Nombre = nombre;
         Descripcion = descripcion;
         Nivel = nivel;
@@ -20,6 +21,7 @@ public abstract class Enemigo  {
         Ataque = 25;
         Defensa = 10;
         Velocidad = 25;
+        Experiencia = 0;
         Estado = estado;
     }
 
@@ -78,6 +80,7 @@ public abstract class Enemigo  {
     public void setVelocidad(int velocidad) {
         Velocidad = velocidad;
     }
+
 
     public String isEstado() {
         return Estado;
