@@ -1,6 +1,6 @@
 package Personaje;
 
-public abstract class Personaje {
+public class Personaje {
     private String Nombre;
     private String Descripcion;
     private int Nivel;

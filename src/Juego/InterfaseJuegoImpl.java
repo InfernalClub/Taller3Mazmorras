@@ -4,11 +4,15 @@ import Personaje.Personaje;
 import ucn.StdIn;
 import ucn.StdOut;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class InterfaseJuegoImpl implements InterfaseJuego {
 
     Personaje nuevoPersonaje;
+
+    List<Personaje> nuevaClase = new ArrayList<>();
 
     @Override
     public void Iniciar() {
@@ -84,19 +88,22 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         StdOut.println("MAGO");
         String claseEscogida = StdIn.readString();
 
-        if (claseEscogida.equalsIgnoreCase("Guerreo")){
-
+        if (claseEscogida.equalsIgnoreCase("Guerrero")){
+            nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Vivo","Ataque Doble");
+            nuevaClase.add(nuevoPersonaje);
         }
         if (claseEscogida.equalsIgnoreCase("Arquero")){
-
+            nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Vivo","Ataque Multiple");
+            nuevaClase.add(nuevoPersonaje);
         }
         if (claseEscogida.equalsIgnoreCase("Mago")){
-
+            nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Vivo","Regeneracion");
+            nuevaClase.add(nuevoPersonaje);
         }else {
             StdOut.println("Error, ingrese una opcion correcta");
         }
 
-       // nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,true,"Regeneracion");
+
 
     }
 
