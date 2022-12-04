@@ -6,7 +6,10 @@ public interface InterfaseJuego {
     void CreacionPersonaje();
     void FinalDungeons();
     void Inspeccionar();
-    void Batalla();
+
+
+    void Batalla(int enemigos);
+
     void VerPersonaje();
 
 

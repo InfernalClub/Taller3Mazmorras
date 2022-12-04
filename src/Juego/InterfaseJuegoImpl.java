@@ -14,6 +14,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     List<Personaje> nuevaClase = new ArrayList<>();
 
+    int numeroMazmorra = 1;
+    int mazmorraActual = numeroMazmorra;
+    boolean explorado = false;
+
     @Override
     public void Iniciar() {
 
@@ -81,12 +85,12 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         StdOut.println("[*] CREACION DE PERSONAJE [*]");
         StdOut.println("");
         StdOut.println(" ESCOJA UNA CLASE: ");
-        StdOut.println("Guerrero");
+        StdOut.println("Espadachin");
         StdOut.println("Arquero");
         StdOut.println("Mago");
         String claseEscogida = StdIn.readString();
 
-        if (claseEscogida.equalsIgnoreCase("Guerrero")){
+        if (claseEscogida.equalsIgnoreCase("Espadachin")){
             nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Ataque Doble");
             nuevaClase.add(nuevoPersonaje);
             StdOut.println("Personaje Creado, ¡que comienze la aventura!");
@@ -116,9 +120,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         boolean corriendo = true;
 
 
+
         while (corriendo) {
             StdOut.println("------------->FINAL DUNGEONS<-------------");
-            StdOut.println("[!] Te encuentras en la mazmorra N°" + " [!]");
+            StdOut.println("[!] Te encuentras en la mazmorra N°" + numeroMazmorra + " [!]");
             StdOut.println("");
             StdOut.println("[1] Inspeccionar");
             StdOut.println("[2] Ver Personaje");
@@ -135,7 +140,9 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                 decision = Integer.parseInt(opcion);
                 switch (decision) {
                     case 1:
+                        explorado = true;
                         Inspeccionar();
+
                         break;
 
                     case 2:
@@ -143,10 +150,29 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                         break;
 
                     case 3:
-                        //();
+                        if (explorado = false)
+                        {
+                            System.out.println("No haz explorado la masmorra actual para poder subir.");
+                        }
+                        else
+                        {
+                            numeroMazmorra =+1;
+                            FinalDungeons();
+                        }
                         break;
                     case 4:
-                        //();
+                        if (numeroMazmorra == 1)
+                        {
+                            System.out.println("Ya te encuentras en la primera mazmorra, no se puede volver mas.");
+                            FinalDungeons();
+                        }
+
+                        else
+                        {
+                            numeroMazmorra = numeroMazmorra -1;
+                            FinalDungeons();
+
+                        }
                         break;
                     case 5:
                         System.exit(5);
@@ -170,12 +196,28 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     @Override
     public void Inspeccionar()
     {
+        int enemigos = Randomizer();
+            switch (enemigos)
+            {
+                case 0:
+                    InteractuarNPC(true);
+                    break;
+
+                case 1:
+                    Batalla(1);
+
+                case 2:
+                    Batalla(2);
+
+                case 3:
+                    Batalla(3);
+            }
 
 
     }
 
     @Override
-    public void Batalla()
+    public void Batalla(int enemigos)
     {
 
 
@@ -204,7 +246,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     public int InteractuarNPC(boolean NPC)
     {
         int extraEXP = 0;
-        boolean interactuar = false;
+
         if (NPC = true)
         {
             extraEXP = 100;
