@@ -69,8 +69,6 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         StdOut.println("INGRESE UN NOMBRE: ");
         String nombrePersonaje = StdIn.readString();
 
-
-
         StdOut.println("----->FINAL DUNGEONS<-----");
         StdOut.println("");
         StdOut.println("[*] CREACION DE PERSONAJE [*]");
@@ -83,28 +81,34 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         StdOut.println("[*] CREACION DE PERSONAJE [*]");
         StdOut.println("");
         StdOut.println(" ESCOJA UNA CLASE: ");
-        StdOut.println("GUERRERO");
-        StdOut.println("ARQUERO");
-        StdOut.println("MAGO");
+        StdOut.println("Guerrero");
+        StdOut.println("Arquero");
+        StdOut.println("Mago");
         String claseEscogida = StdIn.readString();
 
         if (claseEscogida.equalsIgnoreCase("Guerrero")){
-            nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Vivo","Ataque Doble");
+            nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Ataque Doble");
             nuevaClase.add(nuevoPersonaje);
+            StdOut.println("Personaje Creado, ¡que comienze la aventura!");
+            FinalDungeons();
         }
         if (claseEscogida.equalsIgnoreCase("Arquero")){
-            nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Vivo","Ataque Multiple");
+            nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Ataque Multiple");
             nuevaClase.add(nuevoPersonaje);
+            StdOut.println("Personaje Creado, ¡que comienze la aventura!");
+            FinalDungeons();
         }
         if (claseEscogida.equalsIgnoreCase("Mago")){
-            nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Vivo","Regeneracion");
+            nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Regeneracion");
             nuevaClase.add(nuevoPersonaje);
+            StdOut.println("Personaje Creado, ¡que comienze la aventura!");
+            FinalDungeons();
         }else {
             StdOut.println("Error, ingrese una opcion correcta");
+            CreacionPersonaje();
         }
 
-
-
+        ;
     }
 
     @Override
@@ -145,18 +149,18 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                         //();
                         break;
                     case 5:
-                        Salir();
+                        System.exit(5);
                         break;
                     default:
                         StdOut.println("Ingrese una opcion de la lista: ");
-                        MenuPrincipal();
+                        FinalDungeons();
 
 
                 }
 
             } catch (Exception e) {
                 StdOut.println("Ingrese una opción válida.");
-                MenuPrincipal();
+                FinalDungeons();
 
 
             }
@@ -179,7 +183,21 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     @Override
     public void VerPersonaje() {
+        StdOut.println("--------------->FINAL DUNGEONS<--------------");
+        StdOut.println("");
+        StdOut.println("");
+        StdOut.println("[*] Nivel: "+nuevoPersonaje.getNivel()+" [*]");
+        StdOut.println("[*] Vida: "+nuevoPersonaje.getVida()+" [*]");
+        StdOut.println("[*] Ataque: "+nuevoPersonaje.getAtaque()+" [*]");
+        StdOut.println("[*] Defensa: "+nuevoPersonaje.getDefensa()+" [*]");
+        StdOut.println("[*] Velocidad: "+nuevoPersonaje.getVelocidad()+" [*]");
+        StdOut.println("");
+        StdOut.println("");
+        StdOut.println("---------------------------------------------");
 
+        StdOut.println("Volver al menu");
+        String respuesta = StdIn.readLine();
+        FinalDungeons();
     }
 
     @Override
