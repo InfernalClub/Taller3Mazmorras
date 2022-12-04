@@ -1,7 +1,9 @@
 package Juego;
 
+import java.io.IOException;
+
 public interface InterfaseJuego {
-    void Iniciar();
+    void Iniciar() throws IOException;
     void MenuPrincipal();
     void CreacionPersonaje();
     void FinalDungeons();
