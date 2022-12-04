@@ -1,9 +1,12 @@
 package Juego;
 
 import Personaje.Personaje;
+import ucn.ArchivoEntrada;
+import ucn.Registro;
 import ucn.StdIn;
 import ucn.StdOut;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -308,5 +311,31 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         }
 
         return NPC;
+    }
+
+    public boolean cargarNombres() throws IOException {
+        ArchivoEntrada archivo = new ArchivoEntrada("nombres.txt");
+        int contador = 0;
+        while (!archivo.isEndFile()) {
+            Registro regEnt = archivo.getRegistro();
+            String nombre = regEnt.getString();
+
+            contador++;
+        }
+        archivo.close();
+        return true;
+    }
+
+    public boolean cargarDescripciones() throws IOException {
+        ArchivoEntrada archivo = new ArchivoEntrada("descripciones.txt");
+        int contador = 0;
+        while (!archivo.isEndFile()) {
+            Registro regEnt = archivo.getRegistro();
+            String descripcion = regEnt.getString();
+
+            contador++;
+        }
+        archivo.close();
+        return true;
     }
 }
