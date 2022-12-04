@@ -65,6 +65,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         StdOut.println("INGRESE UN NOMBRE: ");
         String nombrePersonaje = StdIn.readString();
 
+
+
         StdOut.println("----->FINAL DUNGEONS<-----");
         StdOut.println("");
         StdOut.println("[*] CREACION DE PERSONAJE [*]");
@@ -101,6 +103,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     @Override
     public void FinalDungeons() {
         boolean corriendo = true;
+
 
         while (corriendo) {
             StdOut.println("------------->FINAL DUNGEONS<-------------");
@@ -154,12 +157,16 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     }
 
     @Override
-    public void Inspeccionar() {
+    public void Inspeccionar()
+    {
+
 
     }
 
     @Override
-    public void Batalla() {
+    public void Batalla()
+    {
+
 
     }
 
@@ -169,8 +176,24 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     }
 
     @Override
-    public int InteractuarNPC() {
-        return 0;
+    public int InteractuarNPC(boolean NPC)
+    {
+        int extraEXP = 0;
+        boolean interactuar = false;
+        if (NPC = true)
+        {
+            extraEXP = 100;
+        }
+
+        else
+        {
+            extraEXP = 0;
+            System.out.println("No parece haber reaccion");
+
+
+        }
+
+        return extraEXP;
     }
 
     @Override
@@ -194,7 +217,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     }
 
     @Override
-    public int Efectos() {
+    public int Efectos(int efecto) {
         return 0;
     }
 
@@ -228,4 +251,37 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         return randomNumber;
     }
 
+    public static boolean sobrevivirNPC(int randomNumber)
+    {
+        boolean NPC = false;
+        int chanceSobrevivir = ThreadLocalRandom.current().nextInt(1,21);
+        if (randomNumber == 0)
+        {
+            NPC = true;
+        }
+        if (randomNumber == 1)
+            if(chanceSobrevivir >=18)
+            {
+                NPC = false;
+            }
+            else {NPC = true;}
+
+        else if (randomNumber == 2)
+        {
+            if(chanceSobrevivir >= 14)
+            {
+                NPC = false;
+            }
+            else {NPC = true;}
+        }
+
+        else
+        {
+            if(chanceSobrevivir >= 10)
+            {NPC = false;}
+            else {NPC = true;}
+        }
+
+        return NPC;
+    }
 }
