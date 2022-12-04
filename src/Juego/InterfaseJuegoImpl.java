@@ -156,7 +156,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                         break;
 
                     case 3:
-                        if (explorado = false)
+                        if (!explorado)
                         {
                             System.out.println("No haz explorado la masmorra actual para poder subir.");
                         }
