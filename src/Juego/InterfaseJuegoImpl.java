@@ -18,8 +18,11 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     List<Personaje> nuevaClase = new ArrayList<>();
 
     @Override
-    public void Iniciar() {
-
+    public void Iniciar() throws IOException {
+        if (!cargarNombres() || !cargarDescripciones()) {
+            StdOut.println("No se pudo iniciar el programa");
+        }
+        MenuPrincipal();
     }
 
     @Override
