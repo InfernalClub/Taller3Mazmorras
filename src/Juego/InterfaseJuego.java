@@ -8,12 +8,18 @@ public interface InterfaseJuego {
     void Inspeccionar();
     void Batalla();
     void VerPersonaje();
-    int InteractuarNPC();
+
+
+    int InteractuarNPC(boolean NPC);
+
     int AtacarPersonaje();
     int AtacarEnemigo();
     int AtaqueEspecialPersonaje();
     int AtaqueEspecialEnemigo();
-    int Efectos();
+
+
+    int Efectos(int efecto);
+
     int Defender();
     void Salir();
 
