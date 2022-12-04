@@ -195,8 +195,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         StdOut.println("");
         StdOut.println("---------------------------------------------");
 
-        StdOut.println("Volver al menu");
-        String respuesta = StdIn.readLine();
+        StdOut.println("Presione enter para volver al menu");
+        String respuesta = StdIn.readString();
         FinalDungeons();
     }
 
