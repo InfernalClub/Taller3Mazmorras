@@ -1,5 +1,6 @@
 package Juego;
 
+import Enemigo.Enemigo;
 import Personaje.Personaje;
 import ucn.ArchivoEntrada;
 import ucn.Registro;
@@ -20,12 +21,22 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     int numeroMazmorra = 1;
     int mazmorraActual = numeroMazmorra;
     boolean explorado = false;
+    Enemigo Zombie1, Vampiro1, HombreLobo1;
+    ArrayList<Enemigo> enemigos = new ArrayList<Enemigo>(3);
+
 
     @Override
     public void Iniciar() throws IOException {
         if (!cargarNombres() || !cargarDescripciones()) {
             StdOut.println("No se pudo iniciar el programa");
         }
+
+
+        enemigos.add(Zombie1);
+        enemigos.add(Vampiro1);
+        enemigos.add(HombreLobo1);
+
+
         MenuPrincipal();
     }
 
@@ -225,6 +236,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     @Override
     public void Batalla(int enemigos)
     {
+        switch (enemigos) {
+            case 1:
+                System.out.println("Te haz encontrado a ");
+        }
 
 
     }
