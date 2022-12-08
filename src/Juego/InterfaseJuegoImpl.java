@@ -23,6 +23,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     boolean explorado = false;
     Enemigo Zombie1, Vampiro1, HombreLobo1;
     ArrayList<Enemigo> enemigos = new ArrayList<Enemigo>(3);
+    ArrayList<Personaje> nuevaCLase = new ArrayList<Personaje>(100);
 
 
     @Override
@@ -286,7 +287,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     @Override
     public int AtacarPersonaje() {
-        return 0;
+        return (int) (nuevaCLase.get(0).getAtaque()*enemigos.get(0).getDefensa());
     }
 
     @Override
