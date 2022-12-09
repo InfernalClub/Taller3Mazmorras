@@ -239,7 +239,24 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     {
         switch (enemigos) {
             case 1:
-                System.out.println("Te haz encontrado a ");
+                System.out.println("Te haz encontrado a un enemigo! ");
+                System.out.println("*****ENEMIGO*****");
+                System.out.println("[*] Nivel:  [*]");
+                System.out.println("[*] Vida: [*]");
+                System.out.println("[*] Estado:  [*]");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("*****TU*****");
+                System.out.println("[*] Nivel:  [*]");
+                System.out.println("[*] Vida: [*]");
+                System.out.println("[*] Estado:  [*]");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("[1] Atacar");
+                System.out.println("[2] Usar el ataque especial");
+                System.out.println("[3] Defender");
+
+
         }
 
 
