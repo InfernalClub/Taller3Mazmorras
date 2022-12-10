@@ -304,6 +304,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         return extraEXP;
     }
 
+
+
+
+
     @Override
     public int AtacarPersonaje() {
        int vidaEnemigo=110;
@@ -408,6 +412,36 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     public void Salir() {
         System.exit(2);
     }
+
+    public void SubirDeNivel()
+    {
+        nuevoPersonaje.setNivel(nuevoPersonaje.getNivel()+1);
+        if (nuevoPersonaje.getNivel()== 2)
+        {
+            nuevoPersonaje.setAtaque((int) (nuevoPersonaje.getAtaque()*1.5));
+            nuevoPersonaje.setDefensa((int) (nuevoPersonaje.getDefensa()*1.5));
+            nuevoPersonaje.setVida((int) (nuevoPersonaje.getVida()*1.5));
+            nuevoPersonaje.setVelocidad((int) (nuevoPersonaje.getVelocidad()*1.5));
+        }
+
+        if (nuevoPersonaje.getNivel() == 3)
+        {
+            nuevoPersonaje.setAtaque((int) (nuevoPersonaje.getAtaque()*2));
+            nuevoPersonaje.setDefensa((int) (nuevoPersonaje.getDefensa()*2));
+            nuevoPersonaje.setVida((int) (nuevoPersonaje.getVida()*2));
+            nuevoPersonaje.setVelocidad((int) (nuevoPersonaje.getVelocidad()*2));
+        }
+
+        if (nuevoPersonaje.getNivel() == 4)
+        {
+            nuevoPersonaje.setAtaque((int) (nuevoPersonaje.getAtaque()*3));
+            nuevoPersonaje.setDefensa((int) (nuevoPersonaje.getDefensa()*3));
+            nuevoPersonaje.setVida((int) (nuevoPersonaje.getVida()*3));
+            nuevoPersonaje.setVelocidad((int) (nuevoPersonaje.getVelocidad()*3));
+        }
+    }
+
+
 
     /**
      *  Metodo que pasa un dato de String a un dato double
