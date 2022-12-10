@@ -160,8 +160,13 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                 decision = Integer.parseInt(opcion);
                 switch (decision) {
                     case 1:
-                        explorado = true;
-                        Inspeccionar();
+                        if (explorado = false)
+                        {
+                            explorado = true;
+                            Inspeccionar();
+                        }
+                        else {System.out.println("Ya exploraste la masmorra.");}
+                        FinalDungeons();
 
                         break;
 
@@ -373,6 +378,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Doble Ataque")){
             
         }
+        return 0;
     }
 
     @Override
