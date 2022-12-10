@@ -304,6 +304,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     @Override
     public int AtacarPersonaje() {
+        int vidaEnemigo=100;
+
         return (int) (nuevaCLase.get(0).getAtaque()*enemigos.get(0).getDefensa());
     }
 

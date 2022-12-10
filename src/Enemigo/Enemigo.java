@@ -1,6 +1,6 @@
 package Enemigo;
 
-public abstract class Enemigo  {
+public class Enemigo  {
     private String Nombre;
     private String Descripcion;
     private int Nivel;
