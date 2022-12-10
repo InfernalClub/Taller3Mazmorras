@@ -239,27 +239,48 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     @Override
     public void Batalla(int enemigos)
     {
-        switch (enemigos) {
-            case 1:
+
                 System.out.println("Te haz encontrado a un enemigo! ");
                 System.out.println("*****ENEMIGO*****");
                 System.out.println("[*] Nivel:  [*]");
                 System.out.println("[*] Vida: [*]");
                 System.out.println("[*] Estado:  [*]");
-                System.out.println("");
-                System.out.println("");
+                System.out.println(" ");
+                System.out.println(" ");
                 System.out.println("*****TU*****");
                 System.out.println("[*] Nivel:  [*]");
                 System.out.println("[*] Vida: [*]");
                 System.out.println("[*] Estado:  [*]");
-                System.out.println("");
-                System.out.println("");
+                System.out.println(" ");
+                System.out.println(" ");
+                StdOut.println("¿Que deseas hacer?");
                 System.out.println("[1] Atacar");
                 System.out.println("[2] Usar el ataque especial");
                 System.out.println("[3] Defender");
 
+                int opcion = StdIn.readInt();
 
-        }
+                if (opcion==1){
+                    AtacarPersonaje();
+                    Batalla(enemigos);
+                }
+                if (opcion==2){
+                    AtaqueEspecialPersonaje();
+                    Batalla(enemigos);
+                }
+                if (opcion==3){
+                    Defender();
+                    Batalla(enemigos);
+                }
+                else {
+                    StdOut.println("Error, ingrese una opcion correcta");
+                }
+
+                if (enemigo.getVida()==0){
+                    StdOut.println("Haz derrotado a los enemigos, ¿que haras ahora?");
+                    System.out.println(" ");
+                    FinalDungeons();
+                }
 
 
     }
@@ -331,20 +352,23 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         }
 
         vidaEnemigo = vidaEnemigo - (ataqueJugador-enemigo.getDefensa());
-
+        enemigo.setVida(vidaEnemigo);
         return vidaEnemigo;
 
     }
 
     @Override
     public int AtacarEnemigo() {
-
-        return (int) (enemigos.get(0).getAtaque()-nuevaCLase.get(0).getDefensa());
+        int vidaPersonaje = 0;
+        vidaPersonaje = vidaPersonaje - (enemigo.getAtaque()-nuevoPersonaje.getDefensa());
+        return vidaPersonaje;
     }
 
     @Override
     public int AtaqueEspecialPersonaje() {
-        return 0;
+        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Doble Ataque")){
+            
+        }
     }
 
     @Override
@@ -400,8 +424,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     }
 
     @Override
-    public int Defender() {
-        return 0;
+    public void Defender() {
+        StdOut.println("Te has defendido del ataque");
     }
 
     @Override
