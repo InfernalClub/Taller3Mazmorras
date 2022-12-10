@@ -1,5 +1,8 @@
 package Enemigo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Enemigo  {
     private String Nombre;
     private String Descripcion;
@@ -10,7 +13,6 @@ public class Enemigo  {
     private int Velocidad;
     private int Experiencia;
     private String Estado;
-
     private String AtaqueEspecial;
 
     public Enemigo(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, String estado, String AtaqueEspecial) {
@@ -23,6 +25,7 @@ public class Enemigo  {
         Velocidad = 25;
         Experiencia = 0;
         Estado = estado;
+
     }
 
     public String getNombre() {
