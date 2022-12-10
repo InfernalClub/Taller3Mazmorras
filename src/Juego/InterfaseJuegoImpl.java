@@ -311,7 +311,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     @Override
     public int AtacarEnemigo() {
-        return 0;
+
+        return (int) (enemigos.get(0).getAtaque()-nuevaCLase.get(0).getDefensa());
     }
 
     @Override
@@ -321,11 +322,53 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     @Override
     public int AtaqueEspecialEnemigo() {
+        String SP = enemigos.get(0).getAtaqueEspecial();
+        if (SP == "Ralentizar")
+        {
+            System.out.println("El zombie se acerca y te agarra! ");
+            Efectos(2);
+        }
+        if (SP == "Sangrar")
+        {
+            System.out.println("El vampiro empieza a succionar tu sangre! ");
+            Efectos(3);
+        }
+        else
+        {
+            System.out.println("El hombre lobo corta tus arterias! ");
+            Efectos((4));
+        }
         return 0;
     }
 
     @Override
     public int Efectos(int efecto) {
+        switch (efecto)
+        {
+            case 1:
+                System.out.println("Estas regenerando vida!");
+                nuevoPersonaje.setEstado("Regenerar");
+                break;
+
+            case 2:
+                System.out.println("Has sido ralentizado! ");
+                nuevoPersonaje.setEstado("Ralentizado");
+                nuevoPersonaje.setVelocidad(nuevoPersonaje.getVelocidad()/2);
+
+            case 3:
+                System.out.println("Te han vampirificado! ");
+                nuevoPersonaje.setEstado("Vampirismo");
+
+            case 4:
+                System.out.println("Te han hecho sangrar! ");
+                nuevoPersonaje.setEstado("Sangrando");
+
+            case 5:
+                System.out.println("Vuelves a la normalidad");
+                nuevoPersonaje.setEstado("Normal");
+
+        }
+
         return 0;
     }
 
