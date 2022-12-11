@@ -160,7 +160,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                 decision = Integer.parseInt(opcion);
                 switch (decision) {
                     case 1:
-                        if (explorado = false)
+                        if (!explorado)
                         {
                             explorado = true;
                             Inspeccionar();
@@ -200,6 +200,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                         }
                         break;
                     case 5:
+                        StdOut.println("Saliendo de la mazmorra");
                         System.exit(5);
                         break;
                     default:
@@ -230,12 +231,15 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
                 case 1:
                     Batalla(1);
+                    StdOut.println(enemigos);
 
                 case 2:
                     Batalla(2);
+                    StdOut.println(enemigos);
 
                 case 3:
                     Batalla(3);
+                    StdOut.println(enemigos);
             }
 
 
@@ -244,42 +248,70 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     @Override
     public void Batalla(int enemigos)
     {
-
+                
                 System.out.println("Te haz encontrado a un enemigo! ");
+                for (int i = 0; i <enemigos ; i++) {
                 System.out.println("*****ENEMIGO*****");
-                System.out.println("[*] Nivel:  [*]");
-                System.out.println("[*] Vida: [*]");
-                System.out.println("[*] Estado:  [*]");
+                System.out.println("[*] Nivel:  "+enemigo.getNivel()+" "+enemigo.getNombre()+" "+enemigo.getDescripcion());
+                System.out.println("[*] Vida: "+enemigo.getVida());
+                System.out.println("[*] Estado:  "+enemigo.getEstado());
                 System.out.println(" ");
                 System.out.println(" ");
+                }
+
                 System.out.println("*****TU*****");
-                System.out.println("[*] Nivel:  [*]");
-                System.out.println("[*] Vida: [*]");
-                System.out.println("[*] Estado:  [*]");
+                System.out.println("[*] Nivel: "+nuevoPersonaje.getNivel()+" "+nuevoPersonaje.getNombre()+" "+nuevoPersonaje.getDescripcion());
+                System.out.println("[*] Vida: "+nuevoPersonaje.getVida());
+                System.out.println("[*] Estado:  "+nuevoPersonaje.getEstado());
                 System.out.println(" ");
                 System.out.println(" ");
-                StdOut.println("¿Que deseas hacer?");
-                System.out.println("[1] Atacar");
-                System.out.println("[2] Usar el ataque especial");
-                System.out.println("[3] Defender");
 
-                int opcion = StdIn.readInt();
+                if (nuevoPersonaje.getVelocidad() > enemigo.getVelocidad()){
+                    StdOut.println("¿Que deseas hacer?");
+                    System.out.println("[1] Atacar");
+                    System.out.println("[2] Usar el ataque especial");
+                    System.out.println("[3] Defender");
 
-                if (opcion==1){
-                    AtacarPersonaje();
-                    Batalla(enemigos);
+                    int opcion = StdIn.readInt();
+
+                    if (opcion==1){
+                        AtacarPersonaje();
+                        Batalla(enemigos);
+                    }
+                    if (opcion==2){
+                        AtaqueEspecialPersonaje();
+                        Batalla(enemigos);
+                    }
+                    if (opcion==3){
+                        Defender();
+                        Batalla(enemigos);
+                    }
+                    else {
+                        StdOut.println("Error, ingrese una opcion correcta");
+                    }
                 }
-                if (opcion==2){
-                    AtaqueEspecialPersonaje();
-                    Batalla(enemigos);
-                }
-                if (opcion==3){
-                    Defender();
-                    Batalla(enemigos);
-                }
+
                 else {
-                    StdOut.println("Error, ingrese una opcion correcta");
+                    int decisionEnemigo =RandomizerEnemigo();
+
+                    if (decisionEnemigo==1){
+                        AtacarEnemigo();
+                        FinalDungeons();
+                    }
+                    if (decisionEnemigo==2){
+                        AtaqueEspecialEnemigo();
+                        FinalDungeons();
+                    }
+                    if (decisionEnemigo==3){
+                        DefensaEnemigo();
+                        FinalDungeons();
+                    }
+                    else {
+                        StdOut.println("");
+                        FinalDungeons();
+                    }
                 }
+
 
                 if (enemigo.getVida()==0){
                     StdOut.println("Haz derrotado a los enemigos, ¿que haras ahora?");
@@ -390,12 +422,12 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     @Override
     public int AtaqueEspecialEnemigo() {
         String SP = enemigos.get(0).getAtaqueEspecial();
-        if (SP == "Ralentizar")
+        if (SP.equalsIgnoreCase("Ralentizar"))
         {
             System.out.println("El zombie se acerca y te agarra! ");
             Efectos(2);
         }
-        if (SP == "Sangrar")
+        if (SP.equalsIgnoreCase("Sangrar"))
         {
             System.out.println("El vampiro empieza a succionar tu sangre! ");
             Efectos(3);
@@ -413,21 +445,21 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         switch (efecto)
         {
             case 1:
-                System.out.println("Estas regenerando vida!");
+                System.out.println("Estas regenerando vida");
                 nuevoPersonaje.setEstado("Regenerar");
                 break;
 
             case 2:
-                System.out.println("Has sido ralentizado! ");
+                System.out.println("¡Has sido ralentizado! ");
                 nuevoPersonaje.setEstado("Ralentizado");
                 nuevoPersonaje.setVelocidad(nuevoPersonaje.getVelocidad()/2);
 
             case 3:
-                System.out.println("Te han vampirificado! ");
+                System.out.println("¡Te han vampirificado! ");
                 nuevoPersonaje.setEstado("Vampirismo");
 
             case 4:
-                System.out.println("Te han hecho sangrar! ");
+                System.out.println("¡Te han hecho sangrar! ");
                 nuevoPersonaje.setEstado("Sangrando");
 
             case 5:
@@ -501,6 +533,12 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     public static int Randomizer()
     {
         int randomNumber = ThreadLocalRandom.current().nextInt(0,   4);
+        return randomNumber;
+    }
+
+    public static int RandomizerEnemigo()
+    {
+        int randomNumber = ThreadLocalRandom.current().nextInt(1,   4);
         return randomNumber;
     }
 

@@ -85,7 +85,7 @@ public class Enemigo  {
     }
 
 
-    public String isEstado() {
+    public String getEstado() {
         return Estado;
     }
 

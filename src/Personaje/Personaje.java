@@ -90,7 +90,7 @@ public class Personaje {
         Experiencia = experiencia;
     }
 
-    public String isEstado() {
+    public String getEstado() {
         return Estado;
     }
 
