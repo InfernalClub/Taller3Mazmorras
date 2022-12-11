@@ -322,6 +322,77 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     }
 
+    public void calculoFinal(int opcion)
+    {
+        switch (opcion)
+        {
+            case 1:
+            int daño = AtacarPersonaje();
+            int vidaEnemigo = enemigos.get(0).getVida() - daño;
+            if (vidaEnemigo <= 0)
+                {
+                    System.out.println("Haz derrotado al enemigo");
+                    FinalDungeons();
+                    break;
+                }
+
+
+
+            case 2:
+                daño = AtaqueEspecialPersonaje();
+                vidaEnemigo = enemigos.get(0).getVida() - daño;
+                if (vidaEnemigo <= 0)
+                {
+                    System.out.println("Haz derrotado al enemigo");
+                    FinalDungeons();
+                    break;
+                }
+
+            case 3:
+                Defender();
+                calculoFinalEnemigo(0);
+                break;
+        }
+
+
+    }
+
+
+    public void calculoFinalEnemigo(int opcion)
+    {
+        switch (opcion)
+        {
+            case 0:
+                System.out.println("El enemigo ataco pero no pudo romper tus defensas! ");
+            case 1:
+                int daño = AtacarEnemigo();
+                int vidaJugador = nuevoPersonaje.getVida() - daño;
+                if (vidaJugador <= 0)
+                {
+                    System.out.println("Te han derrotado!");
+                    Salir();
+                    break;
+                }
+
+
+
+            case 2:
+                AtaqueEspecialEnemigo();
+                vidaJugador = nuevoPersonaje.getVida();
+                if (vidaJugador <= 0)
+                {
+                    System.out.println("Te han derrotado!");
+                    Salir();
+                    break;
+                }
+
+            case 3:
+                DefensaEnemigo();
+        }
+
+
+    }
+
     @Override
     public void VerPersonaje() {
         StdOut.println("--------------->FINAL DUNGEONS<--------------");
