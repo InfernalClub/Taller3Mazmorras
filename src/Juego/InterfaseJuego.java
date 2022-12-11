@@ -26,6 +26,7 @@ public interface InterfaseJuego {
     int Efectos(int efecto);
 
     void Defender();
+    void DefensaEnemigo();
     void Salir();
 
 }

@@ -375,10 +375,16 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     @Override
     public int AtaqueEspecialPersonaje() {
+        int ataquePersonaje=0;
         if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Doble Ataque")){
-            
+            ataquePersonaje = nuevoPersonaje.getAtaque() * 2;
         }
-        return 0;
+        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Ataque Multiple")){
+            ataquePersonaje = nuevoPersonaje.getAtaque() * 2;
+        }
+
+
+        return ataquePersonaje;
     }
 
     @Override
@@ -436,6 +442,11 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     @Override
     public void Defender() {
         StdOut.println("Te has defendido del ataque");
+    }
+
+    @Override
+    public void DefensaEnemigo() {
+        StdOut.println("El enemigo a bloqueado tu ataque");
     }
 
     @Override
