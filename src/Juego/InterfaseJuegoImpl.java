@@ -181,7 +181,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                         }
                         else
                         {
-                            numeroMazmorra =+1;
+                            numeroMazmorra++;
 
                             if (numeroMazmorra == mazmorraActual){explorado = false;}
                             FinalDungeons();
@@ -196,7 +196,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
                         else
                         {
-                            numeroMazmorra = numeroMazmorra -1;
+                            numeroMazmorra--;
                             FinalDungeons();
 
                         }
@@ -427,9 +427,11 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
         if (NPC = true)
         {
-            mazmorraActual =+1;
+            mazmorraActual++;
             nuevoPersonaje.setExperiencia(nuevoPersonaje.getExperiencia()+100);
-            if (nuevoPersonaje.getExperiencia() >= 300){SubirDeNivel();}
+            if (nuevoPersonaje.getExperiencia() >= 300 && nuevoPersonaje.getNivel() == 1){SubirDeNivel();}
+            if (nuevoPersonaje.getExperiencia() >= 750 && nuevoPersonaje.getNivel() == 2){SubirDeNivel();}
+            if (nuevoPersonaje.getExperiencia() >= 1250 && nuevoPersonaje.getNivel() == 3){SubirDeNivel();}
             System.out.println("Hola, no hay nadie por aca y estaba esperando a alguien");
             FinalDungeons();
         }
@@ -438,7 +440,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         {
 
             System.out.println("No parece haber reaccion");
-            mazmorraActual =+1;
+            mazmorraActual++;
             FinalDungeons();
 
         }
@@ -573,7 +575,6 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     public void SubirDeNivel()
     {
         nuevoPersonaje.setNivel(nuevoPersonaje.getNivel()+1);
-        nuevoPersonaje.setExperiencia(0);
         if (nuevoPersonaje.getNivel()== 2)
         {
             nuevoPersonaje.setAtaque((int) (nuevoPersonaje.getAtaque()*1.5));
