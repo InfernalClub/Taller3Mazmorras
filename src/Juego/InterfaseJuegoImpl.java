@@ -230,16 +230,22 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     break;
 
                 case 1:
-                    Batalla(1);
                     StdOut.println(enemigos);
+                    Batalla(1);
+                    break;
+
 
                 case 2:
-                    Batalla(2);
                     StdOut.println(enemigos);
+                    Batalla(2);
+                    break;
+
 
                 case 3:
-                    Batalla(3);
                     StdOut.println(enemigos);
+                    Batalla(3);
+                    break;
+
             }
 
 
@@ -327,8 +333,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         switch (opcion)
         {
             case 1:
-            int daño = AtacarPersonaje();
-            int vidaEnemigo = enemigos.get(0).getVida() - daño;
+            int danio = AtacarPersonaje();
+            int vidaEnemigo = enemigos.get(0).getVida() - danio;
             if (vidaEnemigo <= 0)
                 {
                     System.out.println("Haz derrotado al enemigo");
@@ -339,8 +345,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
 
             case 2:
-                daño = AtaqueEspecialPersonaje();
-                vidaEnemigo = enemigos.get(0).getVida() - daño;
+                danio = AtaqueEspecialPersonaje();
+                vidaEnemigo = enemigos.get(0).getVida() - danio;
                 if (vidaEnemigo <= 0)
                 {
                     System.out.println("Haz derrotado al enemigo");
@@ -365,8 +371,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
             case 0:
                 System.out.println("El enemigo ataco pero no pudo romper tus defensas! ");
             case 1:
-                int daño = AtacarEnemigo();
-                int vidaJugador = nuevoPersonaje.getVida() - daño;
+                int danio = AtacarEnemigo();
+                int vidaJugador = nuevoPersonaje.getVida() - danio;
                 if (vidaJugador <= 0)
                 {
                     System.out.println("Te han derrotado!");
