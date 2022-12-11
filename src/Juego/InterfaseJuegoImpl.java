@@ -182,6 +182,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                         else
                         {
                             numeroMazmorra =+1;
+                            mazmorraActual =+1;
+                            if (numeroMazmorra == mazmorraActual){explorado = false;}
                             FinalDungeons();
                         }
                         break;
