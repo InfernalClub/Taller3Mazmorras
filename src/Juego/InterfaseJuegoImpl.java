@@ -182,7 +182,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                         else
                         {
                             numeroMazmorra =+1;
-                            mazmorraActual =+1;
+
                             if (numeroMazmorra == mazmorraActual){explorado = false;}
                             FinalDungeons();
                         }
@@ -427,6 +427,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
         if (NPC = true)
         {
+            mazmorraActual =+1;
             nuevoPersonaje.setExperiencia(nuevoPersonaje.getExperiencia()+100);
             if (nuevoPersonaje.getExperiencia() >= 300){SubirDeNivel();}
             System.out.println("Hola, no hay nadie por aca y estaba esperando a alguien");
@@ -437,6 +438,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         {
 
             System.out.println("No parece haber reaccion");
+            mazmorraActual =+1;
             FinalDungeons();
 
         }
