@@ -15,7 +15,7 @@ public interface InterfaseJuego {
     void VerPersonaje();
 
 
-    int InteractuarNPC(boolean NPC);
+    void InteractuarNPC(boolean NPC);
 
     int AtacarPersonaje();
     int AtacarEnemigo();

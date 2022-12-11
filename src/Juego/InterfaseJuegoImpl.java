@@ -419,24 +419,27 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     }
 
     @Override
-    public int InteractuarNPC(boolean NPC)
+    public void InteractuarNPC(boolean NPC)
     {
         int extraEXP = 0;
 
         if (NPC = true)
         {
-            extraEXP = 100;
+            nuevoPersonaje.setExperiencia(nuevoPersonaje.getExperiencia()+100);
+            if (nuevoPersonaje.getExperiencia() >= 300){SubirDeNivel();}
+            System.out.println("Hola, no hay nadie por aca y estaba esperando a alguien");
+            FinalDungeons();
         }
 
         else
         {
-            extraEXP = 0;
-            System.out.println("No parece haber reaccion");
 
+            System.out.println("No parece haber reaccion");
+            FinalDungeons();
 
         }
 
-        return extraEXP;
+        return ;
     }
 
 
@@ -566,6 +569,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     public void SubirDeNivel()
     {
         nuevoPersonaje.setNivel(nuevoPersonaje.getNivel()+1);
+        nuevoPersonaje.setExperiencia(0);
         if (nuevoPersonaje.getNivel()== 2)
         {
             nuevoPersonaje.setAtaque((int) (nuevoPersonaje.getAtaque()*1.5));
