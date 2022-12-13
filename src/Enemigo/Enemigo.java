@@ -16,15 +16,15 @@ public class Enemigo  {
     private String AtaqueEspecial;
 
     public Enemigo(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, String estado, String AtaqueEspecial) {
-        Nombre = nombre;
-        Descripcion = descripcion;
-        Nivel = nivel;
+        Nombre = null;
+        Descripcion = null;
+        Nivel = 1;
         Vida = 110;
         Ataque = 25;
         Defensa = 10;
         Velocidad = 25;
-        Experiencia = 0;
-        Estado = estado;
+        Experiencia = 100;
+        Estado = "Normal";
 
     }
 
@@ -99,5 +99,9 @@ public class Enemigo  {
 
     public void setAtaqueEspecial(String ataqueEspecial) {
         AtaqueEspecial = ataqueEspecial;
+    }
+
+    public int getExperiencia() {
+        return Experiencia;
     }
 }
