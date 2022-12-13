@@ -257,13 +257,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     public void Batalla(int enemigos)
     {
 
-        enemigoLobo = new Enemigo("Hombre Lobo", "El Feroz",1,110,25,10,25,100,"Normal","Araniar");
-        enemigoVampiro = new Enemigo("Dracula","El Temible",1,110,25,10,25,100,"Normal","Sangrar");
-        enemigoZombie = new Enemigo("Frank","El Abominable",1,110,25,10,25,100,"Normal","Relentizar");
 
-        listaEnemigos.add(enemigoLobo);
-        listaEnemigos.add(enemigoVampiro);
-        listaEnemigos.add(enemigoZombie);
 
         System.out.println("Te haz encontrado a un enemigo! ");
 
@@ -294,16 +288,16 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     int opcion = StdIn.readInt();
 
                     if (opcion==1){
-                        calculoFinal(opcion);
-                        Batalla(enemigos);
+                        calculoFinal(1);
+
                     }
                     if (opcion==2){
-                        calculoFinal(opcion);
-                        Batalla(enemigos);
+                        calculoFinal(2);
+
                     }
                     if (opcion==3){
-                        calculoFinal(opcion);
-                        Batalla(enemigos);
+                        calculoFinal(3);
+
                     }
                     else {
                         StdOut.println("Error, ingrese una opcion correcta");
@@ -315,15 +309,15 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
                     if (decisionEnemigo==1){
                         AtacarEnemigo();
-                        Batalla(enemigos);
+
                     }
                     if (decisionEnemigo==2){
                         AtaqueEspecialEnemigo();
-                        Batalla(enemigos);
+
                     }
                     if (decisionEnemigo==3){
                         DefensaEnemigo();
-                        Batalla(enemigos);
+
                     }
                     else {
                         StdOut.println("");
@@ -354,6 +348,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     FinalDungeons();
                     break;
                 }
+            calculoFinalEnemigo(RandomizerEnemigo());
 
 
 
@@ -366,6 +361,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     FinalDungeons();
                     break;
                 }
+                calculoFinalEnemigo(RandomizerEnemigo());
 
             case 3:
                 Defender();
@@ -392,6 +388,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     Salir();
                     break;
                 }
+                Batalla(3);
 
 
 
@@ -404,9 +401,11 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     Salir();
                     break;
                 }
+                Batalla(3);
 
             case 3:
                 DefensaEnemigo();
+                Batalla(3);
         }
 
 
