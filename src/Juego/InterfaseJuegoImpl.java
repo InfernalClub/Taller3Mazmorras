@@ -27,9 +27,19 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     int numeroMazmorra = 1;
     int mazmorraActual = numeroMazmorra;
     boolean explorado = false;
-    ArrayList<Enemigo> listaEnemigos = new ArrayList<Enemigo>(3);
-    ArrayList<Personaje> nuevaCLase = new ArrayList<Personaje>(100);
 
+    ArrayList<Personaje> nuevaCLase = new ArrayList<Personaje>(100);
+    Enemigo hombreLobo = new Enemigo("Hommbre Lobo","El feroz",1,110,25,10,25,0,"normal","Araniar");
+    Enemigo vampiro = new Enemigo("Vampiro","El feroz",1,110,25,10,25,0,"normal","Sangrar");
+    Enemigo zombi = new Enemigo("Zombi","El feroz",1,110,25,10,25,0,"normal","Ralentizar");
+
+    ArrayList<Enemigo> listaEnemigos = new ArrayList<Enemigo>();
+
+    {
+        listaEnemigos.add(hombreLobo);
+        listaEnemigos.add(vampiro);
+        listaEnemigos.add(zombi);
+    }
 
     @Override
     public void Iniciar() throws IOException {
@@ -162,7 +172,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     case 1:
                         if (!explorado)
                         {
-                            explorado = true;
+
                             Inspeccionar();
                         }
                         else {System.out.println("Ya exploraste la masmorra.");}
@@ -229,24 +239,24 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
             {
                 case 0:
                     InteractuarNPC(true);
-                    break;
+
 
                 case 1:
                     StdOut.println(enemigos);
                     Batalla(1);
-                    break;
+
 
 
                 case 2:
                     StdOut.println(enemigos);
                     Batalla(2);
-                    break;
+
 
 
                 case 3:
                     StdOut.println(enemigos);
                     Batalla(3);
-                    break;
+
 
             }
             return enemigos;
@@ -263,9 +273,9 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
                 for (int i = 0; i < enemigos; i++) {
                 System.out.println("*****ENEMIGO*****");
-                System.out.println("[*] Nivel:  "+enemigoZombie.getNivel()+" "+enemigoLobo.getNombre()+" "+enemigoLobo.getDescripcion());
-                System.out.println("[*] Vida: "+enemigoLobo.getVida());
-                System.out.println("[*] Estado:  "+enemigoLobo.getEstado());
+                System.out.println("[*] Nivel:  "+listaEnemigos.get(0).getNivel()+" "+listaEnemigos.get(1).getNombre()+" "+listaEnemigos.get(2).getDescripcion());
+                System.out.println("[*] Vida: "+listaEnemigos.get(0).getVida());
+                System.out.println("[*] Estado:  "+listaEnemigos.get(0).getEstado());
                 System.out.println(" ");
                 System.out.println(" ");
                 }
@@ -279,7 +289,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                 System.out.println(" ");
                 System.out.println(" ");
 
-                if (nuevoPersonaje.getVelocidad() > enemigoLobo.getVelocidad()){
+                if (nuevoPersonaje.getVelocidad() > listaEnemigos.get(0).getVelocidad())
+                {
                     StdOut.println("¿Que deseas hacer?");
                     System.out.println("[1] Atacar");
                     System.out.println("[2] Usar el ataque especial");
@@ -287,27 +298,28 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
                     int opcion = StdIn.readInt();
 
-                    if (opcion==1){
-                        calculoFinal(1);
+                    switch (opcion)
+                    {
+                        case 1:
+                            calculoFinal(1);
 
-                    }
-                    if (opcion==2){
-                        calculoFinal(2);
+                        case 2:
+                            calculoFinal(2);
 
-                    }
-                    if (opcion==3){
-                        calculoFinal(3);
+                        case 3:
+                            calculoFinal(3);
 
+                        default:
+                            StdOut.println("Error, ingrese una opcion correcta");
                     }
-                    else {
-                        StdOut.println("Error, ingrese una opcion correcta");
-                    }
+
+
                 }
 
                 else {
                     int decisionEnemigo =RandomizerEnemigo();
 
-                    if (decisionEnemigo==1){
+                    if (decisionEnemigo == 1){
                         AtacarEnemigo();
 
                     }
@@ -434,10 +446,12 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     public void InteractuarNPC(boolean NPC)
     {
         int extraEXP = 0;
+        explorado = true;
 
         if (NPC = true)
         {
             mazmorraActual++;
+
             nuevoPersonaje.setExperiencia(nuevoPersonaje.getExperiencia()+100);
             if (nuevoPersonaje.getExperiencia() >= 300 && nuevoPersonaje.getNivel() == 1){SubirDeNivel();}
             if (nuevoPersonaje.getExperiencia() >= 750 && nuevoPersonaje.getNivel() == 2){SubirDeNivel();}
