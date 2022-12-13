@@ -23,8 +23,11 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     int numeroMazmorra = 1;
     int mazmorraActual = numeroMazmorra;
     boolean explorado = false;
-    Enemigo Zombie, Vampiro, HombreLobo;
-    ArrayList<Enemigo> enemigos = new ArrayList<Enemigo>(3);
+    Enemigo Zombie  = new Enemigo (enemigo.getNombre(), enemigo.getDescripcion(), 1,enemigo.getVida(),enemigo.getAtaque(),enemigo.getDefensa(),enemigo.getVelocidad(),0, "Normal", "Ralentizar");
+    Enemigo Vampiro  = new Enemigo (enemigo.getNombre(), enemigo.getDescripcion(), 1,enemigo.getVida(),enemigo.getAtaque(),enemigo.getDefensa(),enemigo.getVelocidad(),0, "Normal", "Sangrar");
+    Enemigo HombreLobo  = new Enemigo (enemigo.getNombre(), enemigo.getDescripcion(), 1,enemigo.getVida(),enemigo.getAtaque(),enemigo.getDefensa(),enemigo.getVelocidad(),0, "Normal", "Arañar");
+
+    ArrayList<Enemigo> listaEnemigos = new ArrayList<Enemigo>(3);
     ArrayList<Personaje> nuevaCLase = new ArrayList<Personaje>(100);
 
 
@@ -35,9 +38,9 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         }
 
 
-        enemigos.add(Zombie);
-        enemigos.add(Vampiro);
-        enemigos.add(HombreLobo);
+        listaEnemigos.add(Zombie);
+        listaEnemigos.add(Vampiro);
+        listaEnemigos.add(HombreLobo);
 
 
         MenuPrincipal();
@@ -258,14 +261,14 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     {
                 
                 System.out.println("Te haz encontrado a un enemigo! ");
-                for (int i = 0; i <enemigos ; i++) {
+                Enemigo NuevoEnemigo = new Enemigo(enemigo.getNombre(), enemigo.getDescripcion(), enemigo.getNivel(),enemigo.getVida(),enemigo.getAtaque(),enemigo.getDefensa(),enemigo.getVelocidad(),0, enemigo.getEstado(), enemigo.getAtaqueEspecial());
                 System.out.println("*****ENEMIGO*****");
-                System.out.println("[*] Nivel:  "+enemigo.getNivel()+" "+enemigo.getNombre()+" "+enemigo.getDescripcion());
-                System.out.println("[*] Vida: "+enemigo.getVida());
-                System.out.println("[*] Estado:  "+enemigo.getEstado());
+                System.out.println("[*] Nivel:  "+NuevoEnemigo.getNivel()+" "+NuevoEnemigo.getNombre()+" "+NuevoEnemigo.getDescripcion());
+                System.out.println("[*] Vida: "+NuevoEnemigo.getVida());
+                System.out.println("[*] Estado:  "+NuevoEnemigo.getEstado());
                 System.out.println(" ");
                 System.out.println(" ");
-                }
+
 
                 System.out.println("*****TU*****");
                 System.out.println("[*] Nivel: "+nuevoPersonaje.getNivel()+" "+nuevoPersonaje.getNombre()+" "+nuevoPersonaje.getDescripcion());
@@ -283,15 +286,15 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     int opcion = StdIn.readInt();
 
                     if (opcion==1){
-                        AtacarPersonaje();
+                        calculoFinal(1);
                         Batalla(enemigos);
                     }
                     if (opcion==2){
-                        AtaqueEspecialPersonaje();
+                        calculoFinal(2);
                         Batalla(enemigos);
                     }
                     if (opcion==3){
-                        Defender();
+                        calculoFinal(3);
                         Batalla(enemigos);
                     }
                     else {
@@ -336,21 +339,22 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         {
             case 1:
             int danio = AtacarPersonaje();
-            int vidaEnemigo = enemigos.get(0).getVida() - danio;
+            int vidaEnemigo = listaEnemigos.get(0).getVida() - danio;
             if (vidaEnemigo <= 0)
                 {
                     System.out.println("Haz derrotado al enemigo");
                     FinalDungeons();
                     break;
                 }
-
+            else{calculoFinalEnemigo(RandomizerEnemigo());}
 
 
             case 2:
                 danio = AtaqueEspecialPersonaje();
-                vidaEnemigo = enemigos.get(0).getVida() - danio;
+                vidaEnemigo = listaEnemigos.get(0).getVida() - danio;
                 if (vidaEnemigo <= 0)
                 {
+
                     System.out.println("Haz derrotado al enemigo");
                     FinalDungeons();
                     break;
@@ -457,24 +461,24 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
        int vidaEnemigo=110;
        int ataqueJugador=40;
 
-       if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Doble Ataque") && enemigos.equals("HombreLobo")){
+       if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Doble Ataque") && listaEnemigos.equals("HombreLobo")){
            ataqueJugador = ataqueJugador*4;
        }
-        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Doble Ataque") && enemigos.equals("Zombie")){
+        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Doble Ataque") && listaEnemigos.equals("Zombie")){
             ataqueJugador = ataqueJugador*2;
         }
 
-        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Ataque Multiple") && enemigos.equals("Vampiro")){
+        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Ataque Multiple") && listaEnemigos.equals("Vampiro")){
             ataqueJugador = ataqueJugador*4;
         }
-        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Ataque Multiple") && enemigos.equals("HombreLobo")){
+        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Ataque Multiple") && listaEnemigos.equals("HombreLobo")){
             ataqueJugador = ataqueJugador*4;
         }
 
-        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Regeneracion") && enemigos.equals("Zombie")){
+        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Regeneracion") && listaEnemigos.equals("Zombie")){
             ataqueJugador = ataqueJugador*4;
         }
-        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Regeneracion") && enemigos.equals("Vampiro")){
+        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Regeneracion") && listaEnemigos.equals("Vampiro")){
             ataqueJugador = ataqueJugador*4;
         }
 
@@ -507,7 +511,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     @Override
     public int AtaqueEspecialEnemigo() {
-        String SP = enemigos.get(0).getAtaqueEspecial();
+        String SP = listaEnemigos.get(0).getAtaqueEspecial();
         if (SP.equalsIgnoreCase("Ralentizar"))
         {
             System.out.println("El zombie se acerca y te agarra! ");
