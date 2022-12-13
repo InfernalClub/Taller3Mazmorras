@@ -16,8 +16,8 @@ public class Enemigo  {
     private String AtaqueEspecial;
 
     public Enemigo(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, String estado, String AtaqueEspecial) {
-        Nombre = null;
-        Descripcion = null;
+        Nombre = nombre;
+        Descripcion = descripcion;
         Nivel = 1;
         Vida = 110;
         Ataque = 25;
