@@ -54,8 +54,9 @@ public class Personaje {
         return Vida;
     }
 
-    public void setVida(int vida) {
+    public int setVida(int vida) {
         Vida = vida;
+        return vida;
     }
 
     public int getAtaque() {
