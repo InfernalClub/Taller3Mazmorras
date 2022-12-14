@@ -196,7 +196,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         }
         // Si los caracteres ingresados se parecen a Mago obtiene la habilidad de Regeneracion
         if (claseEscogida.equalsIgnoreCase("Mago")){
-            nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Regeneracion");
+            nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Regenerar");
             nuevaClase.add(nuevoPersonaje);
             StdOut.println("Personaje Creado, ¡que comienze la aventura!");
             FinalDungeons();
@@ -326,11 +326,13 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
             switch (enemigos)
             {
                 case 0:
+                    extraXP = 100;
                     InteractuarNPC(true);
                     break;
 
 
                 case 1:
+                    extraXP = 150;
                     cantEnemigos = 1;
                     cantTempEne = cantEnemigos;
                     vidaOriginal = ListaEnemigos.get(1).getVida();
@@ -341,6 +343,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
 
                 case 2:
+                    extraXP = 200;
                     cantEnemigos = 2;
                     cantTempEne = cantEnemigos;
                     vidaOriginal = ListaEnemigos.get(1).getVida();
@@ -351,6 +354,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
 
                 case 3:
+                    extraXP = 250;
                     cantEnemigos = 3;
                     cantTempEne = cantEnemigos;
                     vidaOriginal = ListaEnemigos.get(1).getVida();
@@ -491,22 +495,35 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
 
             case 2:
-                danio = nuevoPersonaje.getAtaque()*2;
-                vidaEnemigo = ListaEnemigos.get(0).getVida() - danio;
-                if (vidaEnemigo <= 0)
+
+                if (nuevoPersonaje.getAtaqueEspecial() == "Regenerar")
                 {
-                    System.out.println("Haz derrotado al enemigo");
-                    nuevoPersonaje.setExperiencia(nuevoPersonaje.getExperiencia()+100);
-                    levelUP();
-                    ListaEnemigos.get(pos).setVida(vidaOriginal);
-                    FinalDungeons();
-                    break;
+                    Efectos(1);
                 }
-                ListaEnemigos.get(pos).setVida(vidaEnemigo);
-                calculoFinalEnemigo(RandomOpcionEnemigo(), pos);
+
+                else
+                {
+                    danio = nuevoPersonaje.getAtaque() * 2;
+                    vidaEnemigo = ListaEnemigos.get(0).getVida() - danio;
+                    if (vidaEnemigo <= 0) {
+                        ListaEnemigos.get(pos).setVida(vidaOriginal);
+                        System.out.println("Haz derrotado al enemigo!");
+                        cantTempEne--;
+                        nuevoPersonaje.setExperiencia(nuevoPersonaje.getExperiencia() + 100);
+                        levelUP();
+                        if (cantTempEne == 0) {
+                            InteractuarNPC(sobrevivirNPC(cantEnemigos));
+                        } else {
+                            Batalla(RandomizerEnemigo());
+                        }
+
+                    }
+                    ListaEnemigos.get(pos).setVida(vidaEnemigo);
+                    calculoFinalEnemigo(RandomOpcionEnemigo(), pos);
+                }
 
             case 3:
-                calculoFinalEnemigo(0, pos);
+                calculoFinalEnemigo(4, pos);
                 break;
         }
 
@@ -521,7 +538,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     {
         switch (opcion)
         {
-            case 0:
+            case 4:
                 System.out.println("El enemigo ataco pero no pudo romper tus defensas! ");
                 Batalla(pos);
                 break;
@@ -602,7 +619,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         {
             mazmorraActual++;
 
-            nuevoPersonaje.setExperiencia(nuevoPersonaje.getExperiencia()+100);
+            nuevoPersonaje.setExperiencia(nuevoPersonaje.getExperiencia()+ extraXP);
             levelUP();
             System.out.println("Hola, no hay nadie por aca y estaba esperando a alguien");
             FinalDungeons();
@@ -678,6 +695,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     @Override
     public void AtaqueEspecialEnemigo(int pos) {
         String SP = ListaEnemigos.get(pos).getAtaqueEspecial();
+        System.out.println(SP);
         if (SP.equalsIgnoreCase("Ralentizar"))
         {
             System.out.println("El zombie se acerca y te agarra! ");
@@ -778,9 +796,9 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
      */
     public void levelUP()
     {
-        if (nuevoPersonaje.getExperiencia() >= 300 && nuevoPersonaje.getNivel() == 1){SubirDeNivel();}
-        if (nuevoPersonaje.getExperiencia() >= 750 && nuevoPersonaje.getNivel() == 2){SubirDeNivel();}
-        if (nuevoPersonaje.getExperiencia() >= 1250 && nuevoPersonaje.getNivel() == 3){SubirDeNivel();}
+        if (nuevoPersonaje.getExperiencia() >= 300 && nuevoPersonaje.getNivel() == 1){nuevoPersonaje.setVida(vidaOriginal);SubirDeNivel();}
+        if (nuevoPersonaje.getExperiencia() >= 750 && nuevoPersonaje.getNivel() == 2){nuevoPersonaje.setVida(vidaOriginal);SubirDeNivel();}
+        if (nuevoPersonaje.getExperiencia() >= 1250 && nuevoPersonaje.getNivel() == 3){nuevoPersonaje.setVida(vidaOriginal);SubirDeNivel();}
     }
 
     /**
