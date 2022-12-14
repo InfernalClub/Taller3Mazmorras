@@ -418,7 +418,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         }
 
         System.out.println("¡Te haz encontrado "+cantTempEne+" enemigo/s, preparate!");
-            while (batallando) {
+            while (batallando)
+            {
 
                     // Menu que presenta por pantalla las estadisticas de los enemigos
                     System.out.println("*****ENEMIGO*****");
@@ -437,12 +438,14 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     System.out.println(" ");
                     System.out.println(" ");
 
-                    // Dependiendo de la velocidad del personaje y del enemigo, determina quien pelea primero
-                if (nuevoPersonaje.getVelocidad() > ListaEnemigos.get(enemigos).getVelocidad()) {
                     StdOut.println("¿Que deseas hacer?");
                     System.out.println("[1] Atacar");
                     System.out.println("[2] Usar el ataque especial");
                     System.out.println("[3] Defender");
+
+                // Dependiendo de la velocidad del personaje y del enemigo, determina quien pelea primero
+                if (nuevoPersonaje.getVelocidad() > ListaEnemigos.get(enemigos).getVelocidad())
+                {
 
                     int opcion = StdIn.readInt();
 
@@ -464,37 +467,30 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     }
 
 
-                } else {
-                    int decisionEnemigo = RandomizerEnemigo();
+                }
+                else
+                {
+                    int opcion = StdIn.readInt();
 
-                    if (decisionEnemigo == 1) {
-                        AtacarEnemigo();
+                    switch (opcion) {
+                        case 1:
+                            turnoEnemigo(1, enemigos);
+                            break;
 
-                    }
-                    if (decisionEnemigo == 2) {
-                        ;
+                        case 2:
+                            turnoEnemigo(2, enemigos);
+                            break;
 
-                    }
-                    if (decisionEnemigo == 3) {
-                        StdOut.println("Él enemigo a bloqueado tu ataque");
+                        case 3:
+                            turnoEnemigo(3, enemigos);
+                            break;
 
-                    } else {
-                        StdOut.println("");
-                        FinalDungeons();
+                        default:
+                            StdOut.println("Error, ingrese una opcion correcta");
                     }
                 }
 
-                if (ListaEnemigos.get(0).getVida()==0){
-                    batallando=false;
-                    StdOut.println("Haz derrotado a los enemigos, ¿que haras ahora?");
-                    System.out.println(" ");
-                    FinalDungeons();
-                }
-                else if (nuevoPersonaje.getVida()==0){
-                    batallando=false;
-                    StdOut.println("Te han derrotado en combate");
-                    Salir();
-                }
+
 
             }
 
@@ -629,6 +625,126 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     }
 
+    public void turnoEnemigo(int opcion, int pos)
+    {
+        switch (opcion)
+        {
+            case 1:
+                System.out.println("El enemigo te ataca! ");
+                int danio = ListaEnemigos.get(pos).getAtaque();
+                int vidaJugador = nuevoPersonaje.getVida() - danio;
+                if (vidaJugador <= 0)
+                {
+                    System.out.println("Te han derrotado!");
+                    Salir();
+                    break;
+                }
+                System.out.println("Te han inflingido un total de "+ danio+ " de danio! ");
+                nuevoPersonaje.setVida(vidaJugador);
+                turnoJugador(opcion, pos);
+                break;
+
+
+
+            case 2:
+                System.out.println("El enemigo te humilla! ");
+                Efectos(pos);
+                vidaJugador = nuevoPersonaje.getVida();
+                if (vidaJugador <= 0)
+                {
+                    System.out.println("Te han derrotado!");
+                    Salir();
+                    break;
+                }
+
+                turnoJugador(opcion, pos);
+                break;
+
+            case 3:
+                System.out.println("Él enemigo se defiende !");
+                turnoJugador(0, pos);
+                break;
+        }
+
+
+    }
+    public void turnoJugador(int opcion, int pos)
+    {
+
+        switch (opcion)
+        {
+            case 1:
+                System.out.println("Atacas a tu enemigo! ");
+                int danio = nuevoPersonaje.getAtaque();
+                int vidaEnemigo = ListaEnemigos.get(pos).getVida() - danio;
+                if (vidaEnemigo <= 0)
+                {
+                    ListaEnemigos.get(pos).setVida(vidaOriginal);
+                    System.out.println("Haz derrotado al enemigo!");
+                    cantTempEne--;
+                    nuevoPersonaje.setExperiencia(nuevoPersonaje.getExperiencia()+100);
+                    levelUP();
+                    if (cantTempEne == 0) {
+                        InteractuarNPC(sobrevivirNPC(cantEnemigos));
+                    }
+                    else {Batalla(RandomizerEnemigo());}
+
+                    break;
+                }
+                ListaEnemigos.get(pos).setVida(vidaEnemigo);
+                System.out.println("Haz inflingido un total de "+ danio+ " de danio! ");
+                Batalla(pos);
+                break;
+
+
+
+            case 2:
+
+                if (nuevoPersonaje.getAtaqueEspecial() == "Regenerar")
+                {
+                    Efectos(4);
+                    calculoFinalEnemigo(RandomOpcionEnemigo(), pos);
+                }
+
+                else
+                {
+                    danio = nuevoPersonaje.getAtaque() * 2;
+                    vidaEnemigo = ListaEnemigos.get(0).getVida() - danio;
+                    if (vidaEnemigo <= 0)
+                    {
+                        ListaEnemigos.get(pos).setVida(vidaOriginal);
+                        System.out.println("Haz derrotado al enemigo!");
+                        cantTempEne--;
+                        nuevoPersonaje.setExperiencia(nuevoPersonaje.getExperiencia() + 100);
+                        levelUP();
+                        if (cantTempEne == 0)
+                        {
+                            InteractuarNPC(sobrevivirNPC(cantEnemigos));
+                        }
+                        else
+                        {
+                            Batalla(pos);
+                        }
+
+
+                    }
+                    ListaEnemigos.get(pos).setVida(vidaEnemigo);
+                    calculoFinalEnemigo(RandomOpcionEnemigo(), pos);
+
+                }
+                break;
+            case 3:
+                calculoFinalEnemigo(4, pos);
+                break;
+
+            case 4:
+                System.out.println("El enemigo ha bloqueado nuestro ataque! ");
+                Batalla(pos);
+                break;
+        }
+
+
+    }
     /**
      * VerPersonaje permite observar las estadisticas del personaje
      */
