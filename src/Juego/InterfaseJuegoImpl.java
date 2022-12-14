@@ -35,6 +35,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
      * Funcion que determina si nuestro personaje esta explorando la mazmorra
      */
     boolean explorado = false;
+
+    int cantEnemigos;
+
+    int vidaOriginal;
     /**
      * Lista que almacena los nombres de los enemigos
      */
@@ -324,19 +328,20 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
 
                 case 1:
-
+                    cantEnemigos = RandomizerEnemigo();
+                    vidaOriginal = ListaEnemigos.get(0).getVida();
                     Batalla(1);
 
 
 
                 case 2:
-
+                    cantEnemigos = RandomizerEnemigo();
                     Batalla(2);
 
 
 
                 case 3:
-
+                    cantEnemigos = RandomizerEnemigo();
                     Batalla(3);
 
 
@@ -354,15 +359,15 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     {
         boolean batallando = true;
 
-        System.out.println("¡Te haz encontrado "+enemigos+" enemigo/s, preparate!");
+        System.out.println("¡Te haz encontrado "+cantEnemigos+" enemigo/s, preparate!");
             while (batallando) {
-                for (int i = 0; i < enemigos; i++) {
+                for (int i = 0; i < cantEnemigos; i++) {
                     //
                     System.out.println("*****ENEMIGO*****");
                     System.out.println("[*] Tipo: " + tipoEnemigos.get(RandomizerEnemigo()));
-                    System.out.println("[*] Nivel:  " + ListaEnemigos.get(0).getNivel() + " " + nombresEnemigos.get(RandomizerDescripcionesYNombres()) + " " + descripcionesEnemigos.get(RandomizerDescripcionesYNombres()));
-                    System.out.println("[*] Vida: " + ListaEnemigos.get(0).getVida());
-                    System.out.println("[*] Estado:  " + ListaEnemigos.get(0).getEstado());
+                    System.out.println("[*] Nivel:  " + ListaEnemigos.get(enemigos).getNivel() + " " + nombresEnemigos.get(RandomizerDescripcionesYNombres()) + " " + descripcionesEnemigos.get(RandomizerDescripcionesYNombres()));
+                    System.out.println("[*] Vida: " + ListaEnemigos.get(enemigos).getVida());
+                    System.out.println("[*] Estado:  " + ListaEnemigos.get(enemigos).getEstado());
                     System.out.println(" ");
                     System.out.println(" ");
                 }
@@ -448,7 +453,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
             int vidaEnemigo = ListaEnemigos.get(0).getVida() - danio;
             if (vidaEnemigo <= 0)
                 {
-                    ListaEnemigos.get(0).setVida(vidaEnemigo);
+                    ListaEnemigos.get(0).setVida(vidaOriginal);
                     System.out.println("Haz derrotado al enemigo!");
                     FinalDungeons();
                     break;
@@ -549,9 +554,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
             mazmorraActual++;
 
             nuevoPersonaje.setExperiencia(nuevoPersonaje.getExperiencia()+100);
-            if (nuevoPersonaje.getExperiencia() >= 300 && nuevoPersonaje.getNivel() == 1){SubirDeNivel();}
-            if (nuevoPersonaje.getExperiencia() >= 750 && nuevoPersonaje.getNivel() == 2){SubirDeNivel();}
-            if (nuevoPersonaje.getExperiencia() >= 1250 && nuevoPersonaje.getNivel() == 3){SubirDeNivel();}
+            levelUP();
             System.out.println("Hola, no hay nadie por aca y estaba esperando a alguien");
             FinalDungeons();
         }
@@ -711,6 +714,12 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     }
 
 
+    public void levelUP()
+    {
+        if (nuevoPersonaje.getExperiencia() >= 300 && nuevoPersonaje.getNivel() == 1){SubirDeNivel();}
+        if (nuevoPersonaje.getExperiencia() >= 750 && nuevoPersonaje.getNivel() == 2){SubirDeNivel();}
+        if (nuevoPersonaje.getExperiencia() >= 1250 && nuevoPersonaje.getNivel() == 3){SubirDeNivel();}
+    }
 
     /**
      *  Metodo que pasa un dato de String a un dato double
