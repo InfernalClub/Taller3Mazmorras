@@ -38,6 +38,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     int cantEnemigos;
 
+    int cantTempEne;
+
     int vidaOriginal;
     /**
      * Lista que almacena los nombres de los enemigos
@@ -329,6 +331,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
                 case 1:
                     cantEnemigos = RandomizerEnemigo();
+                    cantTempEne = cantEnemigos;
                     vidaOriginal = ListaEnemigos.get(0).getVida();
                     Batalla(1);
 
@@ -336,12 +339,16 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
                 case 2:
                     cantEnemigos = RandomizerEnemigo();
+                    cantTempEne = cantEnemigos;
+                    vidaOriginal = ListaEnemigos.get(0).getVida();
                     Batalla(2);
 
 
 
                 case 3:
                     cantEnemigos = RandomizerEnemigo();
+                    cantTempEne = cantEnemigos;
+                    vidaOriginal = ListaEnemigos.get(0).getVida();
                     Batalla(3);
 
 
@@ -361,7 +368,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
         System.out.println("¡Te haz encontrado "+cantEnemigos+" enemigo/s, preparate!");
             while (batallando) {
-                for (int i = 0; i < cantEnemigos; i++) {
+
                     //
                     System.out.println("*****ENEMIGO*****");
                     System.out.println("[*] Tipo: " + tipoEnemigos.get(RandomizerEnemigo()));
@@ -370,7 +377,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     System.out.println("[*] Estado:  " + ListaEnemigos.get(enemigos).getEstado());
                     System.out.println(" ");
                     System.out.println(" ");
-                }
+
                     //
                     System.out.println("*****TU*****");
                     System.out.println("[*] Nivel: " + nuevoPersonaje.getNivel() + " " + nuevoPersonaje.getNombre() + " " + nuevoPersonaje.getDescripcion());
@@ -380,7 +387,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     System.out.println(" ");
 
                     //
-                if (nuevoPersonaje.getVelocidad() > ListaEnemigos.get(0).getVelocidad()) {
+                if (nuevoPersonaje.getVelocidad() > ListaEnemigos.get(enemigos).getVelocidad()) {
                     StdOut.println("¿Que deseas hacer?");
                     System.out.println("[1] Atacar");
                     System.out.println("[2] Usar el ataque especial");
@@ -414,7 +421,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
                     }
                     if (decisionEnemigo == 2) {
-                        AtaqueEspecialEnemigo();
+                        AtaqueEspecialEnemigo(enemigos);
 
                     }
                     if (decisionEnemigo == 3) {
@@ -448,21 +455,28 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
      */
     public void calculoFinal(int opcion, int pos)
     {
+
         switch (opcion)
         {
             case 1:
             System.out.println("Atacas a tu enemigo! ");
             int danio = nuevoPersonaje.getAtaque();
-            int vidaEnemigo = ListaEnemigos.get(0).getVida() - danio;
+            int vidaEnemigo = ListaEnemigos.get(pos).getVida() - danio;
             if (vidaEnemigo <= 0)
                 {
-                    ListaEnemigos.get(0).setVida(vidaOriginal);
+                    ListaEnemigos.get(pos).setVida(vidaOriginal);
                     System.out.println("Haz derrotado al enemigo!");
-                    FinalDungeons();
+                    cantTempEne--;
+                    nuevoPersonaje.setExperiencia(nuevoPersonaje.getExperiencia()+100);
+                    if (cantTempEne == 0)
+                    InteractuarNPC(sobrevivirNPC(cantEnemigos));
+
                     break;
                 }
-            ListaEnemigos.get(0).setVida(vidaEnemigo);
+            ListaEnemigos.get(pos).setVida(vidaEnemigo);
+            System.out.println("Haz inflingido un total de "+ danio+ " de danio! ");
             calculoFinalEnemigo(RandomizerEnemigo(), pos );
+            break;
 
 
 
@@ -472,9 +486,11 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                 if (vidaEnemigo <= 0)
                 {
                     System.out.println("Haz derrotado al enemigo");
+                    ListaEnemigos.get(pos).setVida(vidaOriginal);
                     FinalDungeons();
                     break;
                 }
+                ListaEnemigos.get(pos).setVida(vidaEnemigo);
                 calculoFinalEnemigo(RandomizerEnemigo(), pos);
 
             case 3:
@@ -507,11 +523,13 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                 }
                 nuevoPersonaje.setVida(vidaJugador);
                 Batalla(pos);
+                break;
 
 
 
             case 2:
-                AtaqueEspecialEnemigo();
+                System.out.println("El enemigo te humilla! ");
+                AtaqueEspecialEnemigo(pos);
                 vidaJugador = nuevoPersonaje.getVida();
                 if (vidaJugador <= 0)
                 {
@@ -525,6 +543,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
             case 3:
                 System.out.println("Él enemigo desvio tu ataque");
                 Batalla(pos);
+                break;
         }
 
 
@@ -540,6 +559,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         StdOut.println("[*] Ataque: "+nuevoPersonaje.getAtaque()+" [*]");
         StdOut.println("[*] Defensa: "+nuevoPersonaje.getDefensa()+" [*]");
         StdOut.println("[*] Velocidad: "+nuevoPersonaje.getVelocidad()+" [*]");
+        StdOut.println("[*] Experiencia: "+nuevoPersonaje.getExperiencia()+" [*]");
         StdOut.println("");
         StdOut.println("");
         StdOut.println("---------------------------------------------");
@@ -632,7 +652,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     }
 
     @Override
-    public int AtaqueEspecialEnemigo() {
+    public int AtaqueEspecialEnemigo(int enemigo) {
         String SP = ListaEnemigos.get(0).getAtaqueEspecial();
         if (SP.equalsIgnoreCase("Ralentizar"))
         {
@@ -749,7 +769,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     public int RandomizerEnemigo()
     {
-        int randomNumber = ThreadLocalRandom.current().nextInt(1,   4);
+        int randomNumber = ThreadLocalRandom.current().nextInt(0,   3);
         return randomNumber;
     }
 

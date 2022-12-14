@@ -51,7 +51,7 @@ public interface InterfaseJuego {
     /**
      * AtaqueEspecialEnemigo es un metodo que le permite al enemigo ocupar su habilidad especial
      */
-    int AtaqueEspecialEnemigo();
+    int AtaqueEspecialEnemigo(int enemigo);
     /**
      * Efectos es un metodo que guarda los multiples efectos de los enemigos y de los personajes
      */
