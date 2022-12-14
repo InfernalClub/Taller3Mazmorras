@@ -779,8 +779,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     }
 
     /**
-     * Metodo que devuelve un numero
-     * @return
+     * Metodo que devuelve un numero al azar que permite un nombre aleatorio para los enemigos de la mazmorra
+     * @return duvuelve un numero desde el 0 hasta el 5
      */
     public static int RandomizerDescripcionesYNombres()
     {
@@ -788,6 +788,12 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         return randomNumber;
     }
 
+    /**
+     * Metodo que determina si el NPC se encuentra vivo en la mazmorra
+     * @param randomNumber recibe un numero que depende de la cantidad de enemigos
+     * ya que mientras mas enemigos en la mazmorra, es menos probable que aparezca el NPC
+     * @return retorna un true si el NPC se encuentra en la mazmorra y un false si no
+     */
     public static boolean sobrevivirNPC(int randomNumber)
     {
         boolean NPC = false;
