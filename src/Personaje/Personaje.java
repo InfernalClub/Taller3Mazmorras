@@ -1,18 +1,63 @@
 package Personaje;
-
+/**
+ * Clase que representa a nuestro personaje
+ */
 public class Personaje {
+    /**
+     * Nombre del personaje
+     */
     private String Nombre;
+    /**
+     * Descripcion del personaje
+     */
     private String Descripcion;
+    /**
+     * Nivel del personaje
+     */
     private int Nivel;
+    /**
+     * Vida del personaje
+     */
     private int Vida;
+    /**
+     * Ataque del personaje
+     */
     private int Ataque;
+    /**
+     * Defensa del personaje
+     */
     private int Defensa;
+    /**
+     * Velocidad del personaje
+     */
     private int Velocidad;
+    /**
+     * Experiencia del personaje
+     */
     private int Experiencia;
+    /**
+     * Estado del personaje
+     */
     private String Estado;
+    /**
+     * Ataque Especial del personaje
+     */
     private String AtaqueEspecial;
 
-    public Personaje(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, String estado, String AtaqueEspecial) {
+    /**
+     *
+     * @param nombre del personaje
+     * @param descripcion del personaje
+     * @param nivel del personaje
+     * @param vida del personaje
+     * @param ataque del personaje
+     * @param defensa del personaje
+     * @param velocidad del personaje
+     * @param experiencia del personaje
+     * @param estado del personaje
+     * @param ataqueEspecial del personaje
+     */
+    public Personaje(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, String estado, String ataqueEspecial) {
         Nombre = nombre;
         Descripcion = descripcion;
         Nivel = nivel;
@@ -22,10 +67,10 @@ public class Personaje {
         Velocidad = 30;
         Experiencia = 0;
         Estado = estado;
-        AtaqueEspecial = AtaqueEspecial;
+        AtaqueEspecial = ataqueEspecial;
     }
 
-
+    // Getters y Setters
     public String getNombre() {
         return Nombre;
     }

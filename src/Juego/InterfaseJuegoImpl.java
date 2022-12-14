@@ -11,28 +11,50 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-
+/**
+ * Clase que representa el sistema
+ */
 public class InterfaseJuegoImpl implements InterfaseJuego {
-
+    /**
+     * Personaje creado
+     */
     Personaje nuevoPersonaje;
-
+    /**
+     * Lista qye almacena los tipos de personajes
+     */
     List<Personaje> nuevaClase = new ArrayList<>();
-
-
-
-
-
+    /**
+     * Mazmorra donde parte el personaje
+     */
     int numeroMazmorra = 1;
+    /**
+     * Mazmorra donde se encuentra el personaje
+     */
     int mazmorraActual = numeroMazmorra;
+    /**
+     * Funcion que determina si nuestro personaje esta explorando la mazmorra
+     */
     boolean explorado = false;
-
-
+    /**
+     * Lista que almacena los nombres de los enemigos
+     */
     List<String> nombresEnemigos = new ArrayList<>();
+    /**
+     * Lista que almacena las descripciones de los enemigos
+     */
     List<String> descripcionesEnemigos = new ArrayList<>();
+    /**
+     * Lista que almacena los tipos de enemigos
+     */
     List<String> tipoEnemigos = new ArrayList<>();
+    /**
+     * Lista que almacena al contenedor de enemigos
+     */
     List<Enemigo> ListaEnemigos = new ArrayList<>();
 
+
     {
+        // Metodo de la lista nombresEnemigos y se usa para agregar los nombres
         nombresEnemigos.add(0, "Silvo");
         nombresEnemigos.add(1, "Begelle");
         nombresEnemigos.add(2, "Laegon");
@@ -40,49 +62,54 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         nombresEnemigos.add(4, "Juvento");
         nombresEnemigos.add(5, "Tigrit");
 
-
+        // Metodo de la lista descripcionesEnemigos y se usa para agregar las descripciones
         descripcionesEnemigos.add(0, "El Lider");
         descripcionesEnemigos.add(1, "El Ordenado");
         descripcionesEnemigos.add(2, "El Feliz");
         descripcionesEnemigos.add(3, "El Grande");
         descripcionesEnemigos.add(4, "El Feroz");
         descripcionesEnemigos.add(5, "El Dios");
-
+        // Metodo de la lista tipoEnemigos y se usa para agregar los tipos de enemigos
         tipoEnemigos.add(0, "Vampiro");
         tipoEnemigos.add(1, "Hombre Lobo");
         tipoEnemigos.add(2, "Zombie");
-
+        /**
+         * Aqui se agregan a los enemigos en base a sus estadisticas y lo unico que varia seria su nombre,descripcion y habilidad, el nombre y descripcion ocupa un metodo llamado RandomizerDescripcionesYNombres que nos
+         * permite seleccionar de las listas un nombre y una descripcion al azar y luego a cada enemigo se le denomina una unica habilidad
+         */
         Enemigo Zombie = new Enemigo(nombresEnemigos.get(RandomizerDescripcionesYNombres()), descripcionesEnemigos.get(RandomizerDescripcionesYNombres()), 1, 110, 25, 10, 25, 100, "Normal", "Relentizar", tipoEnemigos.get(2));
         Enemigo HombreLobo = new Enemigo(nombresEnemigos.get(RandomizerDescripcionesYNombres()), descripcionesEnemigos.get(RandomizerDescripcionesYNombres()), 1, 110, 25, 10, 25, 100, "Normal", "Sangrar", tipoEnemigos.get(0));
         Enemigo Vampiro = new Enemigo(nombresEnemigos.get(RandomizerDescripcionesYNombres()), descripcionesEnemigos.get(RandomizerDescripcionesYNombres()), 1, 110, 25, 10, 25, 100, "Normal", "Araniar", tipoEnemigos.get(1));
 
-
+        // Aqui se agregan los enemigos creados al contenedor ListaEnemigos
         ListaEnemigos.add(Zombie);
         ListaEnemigos.add(HombreLobo);
         ListaEnemigos.add(Vampiro);
 
-        int rand = RandomizerEnemigo();
-
     }
 
+    /**
+     *  Metodo que inicia el juego
+     */
     @Override
-    public void Iniciar() throws IOException {
-        if (!cargarNombres() || !cargarDescripciones()) {
-            StdOut.println("No se pudo iniciar el programa");
-        }
-
+    public void Iniciar()  {
         MenuPrincipal();
     }
-    int vidaOriginal = ListaEnemigos.get(0).getVida();
+
+    /**
+     * Menu principal del juego
+     */
     @Override
     public void MenuPrincipal() {
+        // Aqui se le da al usuario 2 opciones, jugar o salir
         StdOut.println("----->ZENKAI GAMES PRESENTA<-----");
         StdOut.println("");
         StdOut.println("FINAL DUNGEONS");
         StdOut.println("");
         StdOut.println("[1] INICIAR JUEGO");
         StdOut.println("[2] SALIR");
-
+        // Dependiendo de la opcion, se analiza lo ingresado por consola si lo que ingreso el usuario es valido
+        // y luego de la validacion determina que hacer
         try
         {
             String opcion = StdIn.readLine();
@@ -115,8 +142,12 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         }
     }
 
+    /**
+     * Menu para la creacion del personaje
+     */
     @Override
     public void CreacionPersonaje() {
+        // Aqui se ingresa por consola el nombre que quiera el usuario
         StdOut.println("----->FINAL DUNGEONS<-----");
         StdOut.println("");
         StdOut.println("[*] CREACION DE PERSONAJE [*]");
@@ -124,6 +155,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         StdOut.println("INGRESE UN NOMBRE: ");
         String nombrePersonaje = StdIn.readString();
 
+        // Aqui se ingresa por consola la descripcion que quiera el usuario
         StdOut.println("----->FINAL DUNGEONS<-----");
         StdOut.println("");
         StdOut.println("[*] CREACION DE PERSONAJE [*]");
@@ -131,34 +163,41 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         StdOut.println("INGRESE UNA DESCRIPCION: ");
         String descripcionPersonaje = StdIn.readString();
 
+        // Aqui se escribe por consola la clase que escogera el usuario para iniciar el juego
         StdOut.println("----->FINAL DUNGEONS<-----");
         StdOut.println("");
         StdOut.println("[*] CREACION DE PERSONAJE [*]");
         StdOut.println("");
-        StdOut.println(" ESCOJA UNA CLASE: ");
+        StdOut.println(" ESCOJA UNA CLASE: (Escriba la clase que desea ocupar)");
         StdOut.println("Espadachin");
         StdOut.println("Arquero");
         StdOut.println("Mago");
         String claseEscogida = StdIn.readString();
 
+        // Si los caracteres ingresados se parecen a Espadachin obtiene la habilidad de Ataque Doble
         if (claseEscogida.equalsIgnoreCase("Espadachin")){
             nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Ataque Doble");
             nuevaClase.add(nuevoPersonaje);
             StdOut.println("Personaje Creado, ¡que comienze la aventura!");
             FinalDungeons();
         }
+        // Si los caracteres ingresados se parecen a Arquero obtiene la habilidad de Ataque Multiple
         if (claseEscogida.equalsIgnoreCase("Arquero")){
             nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Ataque Multiple");
             nuevaClase.add(nuevoPersonaje);
             StdOut.println("Personaje Creado, ¡que comienze la aventura!");
             FinalDungeons();
         }
+        // Si los caracteres ingresados se parecen a Mago obtiene la habilidad de Regeneracion
         if (claseEscogida.equalsIgnoreCase("Mago")){
             nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Regeneracion");
             nuevaClase.add(nuevoPersonaje);
             StdOut.println("Personaje Creado, ¡que comienze la aventura!");
             FinalDungeons();
-        }else {
+        }
+        // Esto ocurre si es que no se ingresa lo que se pidio por pantalla
+        else
+        {
             StdOut.println("Error, ingrese una opcion correcta");
             CreacionPersonaje();
         }
@@ -169,12 +208,15 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     }
 
+    /**
+     * Metodo donde comienza el juego
+     */
     @Override
     public void FinalDungeons() {
         boolean corriendo = true;
 
-
-
+        // Mientras la condicion de corriendo siga en true, el juego seguira ejecutandose
+        // para sacar esto nuestro personaje debe morir o encontrarse con el NPC y salir de la mazmorra
         while (corriendo) {
             StdOut.println("------------->FINAL DUNGEONS<-------------");
             StdOut.println("[!] Te encuentras en la mazmorra N°" + numeroMazmorra + " [!]");
@@ -186,29 +228,37 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
             StdOut.println("[5] Salir");
             StdOut.println("");
             StdOut.println("------------------------------------------");
-
+            // Aqui se le ofrece al usuario multiples decisiones acorde a lo que quiera hacer, puede inspeccionar la mazmorra,
+            // ver sus estadisticas, avanzar o retroceder en la mazmorra y salir de la mazmorra
             try {
                 String opcion = StdIn.readLine();
                 int decision;
                 if (isNumeric(opcion)) Integer.parseInt(opcion);
                 decision = Integer.parseInt(opcion);
                 switch (decision) {
+                    // En el caso 1 el personaje decide explorar la mazmorra, donde pueden pasar 2 cosas
+                    // entra en combate o se encuentra al NPC
                     case 1:
                         if (!explorado)
                         {
 
                             Inspeccionar();
                         }
+                        // Esto pas cuando el combate o la interaccion del NPC finalizan
                         else {System.out.println("Ya exploraste la masmorra.");}
                         FinalDungeons();
 
                         break;
 
                     case 2:
+                        // Llama al metodo VerPersonaje para mostrar las estadisticas actuales del personaje
                         VerPersonaje();
                         break;
 
                     case 3:
+                        // Aqui dependiendo de si el personaje entro en combate o esta en el menu del juego pueden pasar
+                        // 2 cosas, si el personaje no a peleado o hablado con el NPC no puede avanzar
+                        // Y si ya hizo una de las 2 cosas entonces ahi recien se puede mover
                         if (!explorado)
                         {
                             System.out.println("No haz explorado la masmorra actual para poder subir.");
@@ -222,6 +272,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                         }
                         break;
                     case 4:
+                        // Este metodo sirve para retroceder de mazmorra, pero con la condicion de que
+                        // si el personaje se encuentra en la mazmorra 1 no puede retroceder de esta
                         if (numeroMazmorra == 1)
                         {
                             System.out.println("Ya te encuentras en la primera mazmorra, no se puede volver mas.");
@@ -236,16 +288,18 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                         }
                         break;
                     case 5:
+                        // Esta opcion sirve para salir de la mazmorra y por ende, salir del juego
                         StdOut.println("Saliendo de la mazmorra");
                         System.exit(5);
                         break;
+                    // Este metodo sirve por si el usuario no ingreso lo que se pedia por pantalla
                     default:
                         StdOut.println("Ingrese una opcion de la lista: ");
                         FinalDungeons();
 
 
                 }
-
+                // Este metodo sirve por si el usuario no ingreso los caracteres requeridos por pantalla
             } catch (Exception e) {
                 StdOut.println("Ingrese una opción válida.");
                 FinalDungeons();
@@ -255,6 +309,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         }
     }
 
+    /**
+     * Metodo que se encarga de manera aleatoria poner o no enemigos en la mazmorra
+     * @return la cantidad de enemigos que nos va a tocar en la mazmorra
+     */
     @Override
     public int Inspeccionar()
     {
@@ -287,34 +345,37 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     }
 
+    /**
+     * Metodo que se encarga de mostrarnos los enemigos a combatir y las variadas opciones del personaje
+     * @param enemigos cantidad de enemigos que nos otorga el sistema
+     */
     @Override
     public void Batalla(int enemigos)
     {
-
+        boolean batallando = true;
 
         System.out.println("¡Te haz encontrado "+enemigos+" enemigo/s, preparate!");
-
+            while (batallando) {
                 for (int i = 0; i < enemigos; i++) {
-                System.out.println("*****ENEMIGO*****");
-                System.out.println("[*] Tipo: "+tipoEnemigos.get(RandomizerEnemigo()));
-                System.out.println("[*] Nivel:  "+ListaEnemigos.get(0).getNivel()+" "+nombresEnemigos.get(RandomizerDescripcionesYNombres())+" "+descripcionesEnemigos.get(RandomizerDescripcionesYNombres()));
-                System.out.println("[*] Vida: "+ListaEnemigos.get(0).getVida());
-                System.out.println("[*] Estado:  "+ListaEnemigos.get(0).getEstado());
-                System.out.println(" ");
-                System.out.println(" ");
+                    //
+                    System.out.println("*****ENEMIGO*****");
+                    System.out.println("[*] Tipo: " + tipoEnemigos.get(RandomizerEnemigo()));
+                    System.out.println("[*] Nivel:  " + ListaEnemigos.get(0).getNivel() + " " + nombresEnemigos.get(RandomizerDescripcionesYNombres()) + " " + descripcionesEnemigos.get(RandomizerDescripcionesYNombres()));
+                    System.out.println("[*] Vida: " + ListaEnemigos.get(0).getVida());
+                    System.out.println("[*] Estado:  " + ListaEnemigos.get(0).getEstado());
+                    System.out.println(" ");
+                    System.out.println(" ");
                 }
+                    //
+                    System.out.println("*****TU*****");
+                    System.out.println("[*] Nivel: " + nuevoPersonaje.getNivel() + " " + nuevoPersonaje.getNombre() + " " + nuevoPersonaje.getDescripcion());
+                    System.out.println("[*] Vida: " + nuevoPersonaje.getVida());
+                    System.out.println("[*] Estado: " + nuevoPersonaje.getEstado());
+                    System.out.println(" ");
+                    System.out.println(" ");
 
-
-
-                System.out.println("*****TU*****");
-                System.out.println("[*] Nivel: "+nuevoPersonaje.getNivel()+" "+nuevoPersonaje.getNombre()+" "+nuevoPersonaje.getDescripcion());
-                System.out.println("[*] Vida: "+nuevoPersonaje.getVida());
-                System.out.println("[*] Estado: "+nuevoPersonaje.getEstado());
-                System.out.println(" ");
-                System.out.println(" ");
-
-                if (nuevoPersonaje.getVelocidad() > ListaEnemigos.get(0).getVelocidad())
-                {
+                    //
+                if (nuevoPersonaje.getVelocidad() > ListaEnemigos.get(0).getVelocidad()) {
                     StdOut.println("¿Que deseas hacer?");
                     System.out.println("[1] Atacar");
                     System.out.println("[2] Usar el ataque especial");
@@ -322,8 +383,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
                     int opcion = StdIn.readInt();
 
-                    switch (opcion)
-                    {
+                    switch (opcion) {
                         case 1:
                             calculoFinal(1);
 
@@ -338,39 +398,46 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     }
 
 
-                }
+                } else {
+                    int decisionEnemigo = RandomizerEnemigo();
 
-                else {
-                    int decisionEnemigo =RandomizerEnemigo();
-
-                    if (decisionEnemigo == 1){
+                    if (decisionEnemigo == 1) {
                         AtacarEnemigo();
 
                     }
-                    if (decisionEnemigo==2){
+                    if (decisionEnemigo == 2) {
                         AtaqueEspecialEnemigo();
 
                     }
-                    if (decisionEnemigo==3){
-                        DefensaEnemigo();
+                    if (decisionEnemigo == 3) {
+                        StdOut.println("Él enemigo a bloqueado tu ataque");
 
-                    }
-                    else {
+                    } else {
                         StdOut.println("");
                         FinalDungeons();
                     }
                 }
 
-
                 if (ListaEnemigos.get(0).getVida()==0){
+                    batallando=false;
                     StdOut.println("Haz derrotado a los enemigos, ¿que haras ahora?");
                     System.out.println(" ");
                     FinalDungeons();
                 }
+                else if (nuevoPersonaje.getVida()==0){
+                    batallando=false;
+                    StdOut.println("Te han derrotado en combate");
+                    Salir();
+                }
 
+            }
 
     }
 
+    /**
+     * Metodo que calcular los danios que nuestro personaje le hace a los enemigos
+     * @param opcion es lo que el usuario ingresa a la hora de combatir
+     */
     public void calculoFinal(int opcion)
     {
         switch (opcion)
@@ -381,7 +448,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
             int vidaEnemigo = ListaEnemigos.get(0).getVida() - danio;
             if (vidaEnemigo <= 0)
                 {
-                    ListaEnemigos.get(0).setVida(vidaOriginal);
+                    ListaEnemigos.get(0).setVida(vidaEnemigo);
                     System.out.println("Haz derrotado al enemigo!");
                     FinalDungeons();
                     break;
@@ -410,7 +477,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     }
 
-
+    /**
+     * Metodo que calcular los danios que el enemigo le hace al personaje
+     * @param opcion es lo que hara el enemigo 
+     */
     public void calculoFinalEnemigo(int opcion)
     {
         switch (opcion)
@@ -442,7 +512,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                 Batalla(3);
 
             case 3:
-                DefensaEnemigo();
+                System.out.println("Él enemigo desvio tu ataque");
                 Batalla(3);
         }
 
@@ -606,10 +676,6 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
 
 
-    @Override
-    public void DefensaEnemigo() {
-        StdOut.println("El enemigo a bloqueado tu ataque");
-    }
 
     @Override
     public void Salir() {
@@ -712,31 +778,9 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         return NPC;
     }
 
-    public boolean cargarNombres() throws IOException {
-        ArchivoEntrada archivo = new ArchivoEntrada("nombres.txt");
-        int contador = 0;
-        while (!archivo.isEndFile()) {
-            Registro regEnt = archivo.getRegistro();
-            String nombreEnemigos = regEnt.getString();
 
-            contador++;
-        }
-        archivo.close();
-        return true;
-    }
 
-    public boolean cargarDescripciones() throws IOException {
-        ArchivoEntrada archivo = new ArchivoEntrada("descripciones.txt");
-        int contador = 0;
-        while (!archivo.isEndFile()) {
-            Registro regEnt = archivo.getRegistro();
-            String descripcionEnemigos = regEnt.getString();
 
-            contador++;
-        }
-        archivo.close();
-        return true;
-    }
 
 
 }

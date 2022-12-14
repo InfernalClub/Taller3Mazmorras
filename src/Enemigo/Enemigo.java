@@ -1,21 +1,67 @@
 package Enemigo;
-
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Clase que representa al enemigo
+ */
 public class Enemigo  {
+    /**
+     * Nombre del enemigo
+     */
     private String Nombre;
+    /**
+     * Descripcion del enemigo
+     */
     private String Descripcion;
+    /**
+     * Nivel del enemigo
+     */
     private int Nivel;
+    /**
+     * Vida del enemigo
+     */
     private int Vida ;
+    /**
+     * Ataque del enemigo
+     */
     private int Ataque ;
+    /**
+     * Defensa del enemigo
+     */
     private int Defensa ;
+    /**
+     * Velocidad del enemigo
+     */
     private int Velocidad;
+    /**
+     * Experiencia del enemigo
+     */
     private int Experiencia;
+    /**
+     * Estado del enemigo
+     */
     private String Estado;
+    /**
+     * AtaqueEspecial del enemigo
+     */
     private String AtaqueEspecial;
+    /**
+     * Tipo de enemigo
+     */
     private String Tipo;
 
+    /**
+     *
+     * @param nombre del enemigo
+     * @param descripcion del enemigo
+     * @param nivel del enemigo
+     * @param vida del enemigo
+     * @param ataque del enemigo
+     * @param defensa del enemigo
+     * @param velocidad del enemigo
+     * @param experiencia del enemigo
+     * @param estado del enemigo
+     * @param AtaqueEspecial del enemigo
+     * @param tipo de enemigo
+     */
     public Enemigo(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, String estado, String AtaqueEspecial,String tipo) {
         Nombre = nombre;
         Descripcion = descripcion;
@@ -28,7 +74,7 @@ public class Enemigo  {
         Estado = "Normal";
         Tipo = tipo;
     }
-
+    // Getters y Setters
     public String getNombre() {
         return Nombre;
     }
