@@ -357,7 +357,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         System.out.println("¡Te haz encontrado "+enemigos+" enemigo/s, preparate!");
             while (batallando) {
                 for (int i = 0; i < enemigos; i++) {
-                    //
+                    // Se muestra por pantalla cuantos enemigos, la vida, el nivel y el estado de el/los enemigos
                     System.out.println("*****ENEMIGO*****");
                     System.out.println("[*] Tipo: " + tipoEnemigos.get(RandomizerEnemigo()));
                     System.out.println("[*] Nivel:  " + ListaEnemigos.get(0).getNivel() + " " + nombresEnemigos.get(RandomizerDescripcionesYNombres()) + " " + descripcionesEnemigos.get(RandomizerDescripcionesYNombres()));
@@ -366,7 +366,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     System.out.println(" ");
                     System.out.println(" ");
                 }
-                    //
+                    // Se muestra por pantalla el nivel,vida y estado de nuestro personaje
                     System.out.println("*****TU*****");
                     System.out.println("[*] Nivel: " + nuevoPersonaje.getNivel() + " " + nuevoPersonaje.getNombre() + " " + nuevoPersonaje.getDescripcion());
                     System.out.println("[*] Vida: " + nuevoPersonaje.getVida());
@@ -374,7 +374,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     System.out.println(" ");
                     System.out.println(" ");
 
-                    //
+                    //Aqui se calcula dependiendo de la velocidad del enemigo y del jugador quien empieza la batalla primero
                 if (nuevoPersonaje.getVelocidad() > ListaEnemigos.get(0).getVelocidad()) {
                     StdOut.println("¿Que deseas hacer?");
                     System.out.println("[1] Atacar");
@@ -399,6 +399,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
 
                 } else {
+                    // Aqui de manera aleatoria ocurren las decisiones de que hara el enemigo en el combate
                     int decisionEnemigo = RandomizerEnemigo();
 
                     if (decisionEnemigo == 1) {
@@ -417,7 +418,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                         FinalDungeons();
                     }
                 }
-
+                // Aqui pueden pasar 2 cosas, el enemigo muere y continua el juego o el personaje muere y se tendra que iniciar de nuevo la mazmorra
                 if (ListaEnemigos.get(0).getVida()==0){
                     batallando=false;
                     StdOut.println("Haz derrotado a los enemigos, ¿que haras ahora?");
@@ -519,6 +520,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     }
 
+    /**
+     * VerPersonaje es el metodo que permite ver las estadisticas de nuestro personaje
+     * Si el personaje sube de nivel estas estadisticas cambiaran de acuerdo a la experiencia obtenida durante el juego
+     */
     @Override
     public void VerPersonaje() {
         StdOut.println("--------------->FINAL DUNGEONS<--------------");
@@ -538,6 +543,11 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         FinalDungeons();
     }
 
+    /**
+     * Este metodo determina por chance si es que nos toca el NPC en una mazmorra, el cual nos otorga
+     * experiencia por encontrarlo
+     * @param NPC es la variable que va dependiendo de la cantida de enemigos dentro de la mazmorra
+     */
     @Override
     public void InteractuarNPC(boolean NPC)
     {
@@ -568,9 +578,9 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     }
 
 
-
-
-
+    /**
+     * Este metodo determina la especialidad de nuestro personaje a la hora de enfrentar a los 3 tipos de enemigos dentro de la mazmorra
+     */
     @Override
     public void AtacarPersonaje() {
 
@@ -599,6 +609,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     }
 
+    /**
+     * Este metodo sirve para realizar el calculo que le quita vida a nuestro personaje
+     * @return la vida del personaje con el danio del enemigo incluido
+     */
     @Override
     public int AtacarEnemigo() {
         int vidaPersonaje = 0;
@@ -606,6 +620,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         return vidaPersonaje;
     }
 
+    /**
+     * Este metodo sirve para ocupar la habilidad especial de nuestro personaje, dependiendo de que clase
+     * escoja el usuario al momento de jugar
+     */
     @Override
     public void AtaqueEspecialPersonaje() {
 
@@ -622,6 +640,11 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     }
 
+    /**
+     * Aqui estan los ataques especiales del enemigo que dependen del tipo de enemigo que nos
+     * enfrentemos en la mazmorra
+     * @return
+     */
     @Override
     public int AtaqueEspecialEnemigo() {
         String SP = ListaEnemigos.get(0).getAtaqueEspecial();
@@ -643,6 +666,11 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         return 0;
     }
 
+    /**
+     * Aqui estan los efectos que pueden afectar a nuestro personaje ya sean positivos o negativos
+     * @param efecto dependiendo del caso se determina que efecto se le aplicara al personaje
+     * @return retorna el efecto que afectara al personaje
+     */
     @Override
     public int Efectos(int efecto) {
         switch (efecto)
@@ -671,17 +699,21 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
         }
 
-        return 0;
+        return efecto;
     }
 
 
-
-
+    /**
+     * Salir es un metodo que nos permite salirnos de la mazmorra
+     */
     @Override
     public void Salir() {
         System.exit(2);
     }
 
+    /**
+     * Este metodo permite al personaje subir de nivel y por ende las estadisticas del personaje dependiendo del nivel
+     */
     public void SubirDeNivel()
     {
         nuevoPersonaje.setNivel(nuevoPersonaje.getNivel()+1);
@@ -726,18 +758,30 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         return true;
     }
 
+    /**
+     * Metodo que sirve para dar un numero al azar que va desde el 0 al 3
+     * @return retorna un numero al azar
+     */
     public static int Randomizer()
     {
         int randomNumber = ThreadLocalRandom.current().nextInt(0,   4);
         return randomNumber;
     }
 
+    /**
+     * Metodo que sirve para dar un numero al azar que va desde el 0 al 3 utilizado para invocar enemigos al azar
+     * @return retorna un numero al azar
+     */
     public int RandomizerEnemigo()
     {
         int randomNumber = ThreadLocalRandom.current().nextInt(1,   4);
         return randomNumber;
     }
 
+    /**
+     * Metodo que devuelve un numero
+     * @return
+     */
     public static int RandomizerDescripcionesYNombres()
     {
         int randomNumber = ThreadLocalRandom.current().nextInt(0,   6);
