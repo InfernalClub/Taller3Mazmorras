@@ -432,7 +432,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
                     }
                     if (decisionEnemigo == 2) {
-                        AtaqueEspecialEnemigo(enemigos);
+                        ;
 
                     }
                     if (decisionEnemigo == 3) {
@@ -498,30 +498,37 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
                 if (nuevoPersonaje.getAtaqueEspecial() == "Regenerar")
                 {
-                    Efectos(1);
+                    Efectos(4);
+                    calculoFinalEnemigo(RandomOpcionEnemigo(), pos);
                 }
 
                 else
                 {
                     danio = nuevoPersonaje.getAtaque() * 2;
                     vidaEnemigo = ListaEnemigos.get(0).getVida() - danio;
-                    if (vidaEnemigo <= 0) {
+                    if (vidaEnemigo <= 0)
+                    {
                         ListaEnemigos.get(pos).setVida(vidaOriginal);
                         System.out.println("Haz derrotado al enemigo!");
                         cantTempEne--;
                         nuevoPersonaje.setExperiencia(nuevoPersonaje.getExperiencia() + 100);
                         levelUP();
-                        if (cantTempEne == 0) {
+                        if (cantTempEne == 0)
+                        {
                             InteractuarNPC(sobrevivirNPC(cantEnemigos));
-                        } else {
+                        }
+                        else
+                        {
                             Batalla(RandomizerEnemigo());
                         }
+
 
                     }
                     ListaEnemigos.get(pos).setVida(vidaEnemigo);
                     calculoFinalEnemigo(RandomOpcionEnemigo(), pos);
-                }
 
+                }
+                break;
             case 3:
                 calculoFinalEnemigo(4, pos);
                 break;
@@ -561,7 +568,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
             case 2:
                 System.out.println("El enemigo te humilla! ");
-                AtaqueEspecialEnemigo(pos);
+                Efectos(pos);
                 vidaJugador = nuevoPersonaje.getVida();
                 if (vidaJugador <= 0)
                 {
@@ -692,27 +699,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
      * @param enemigo
      * @return
      */
-    @Override
-    public void AtaqueEspecialEnemigo(int pos) {
-        String SP = ListaEnemigos.get(pos).getAtaqueEspecial();
-        System.out.println(SP);
-        if (SP.equalsIgnoreCase("Ralentizar"))
-        {
-            System.out.println("El zombie se acerca y te agarra! ");
-            Efectos(2);
-        }
-        if (SP.equalsIgnoreCase("Sangrar"))
-        {
-            System.out.println("El vampiro empieza a succionar tu sangre! ");
-            Efectos(3);
-        }
-        else
-        {
-            System.out.println("El hombre lobo corta tus arterias! ");
-            Efectos((4));
-        }
-        return;
-    }
+
 
     /**
      * Metodo que guarda los efectos que puede sufri o aplicarse el personaje en el combate
@@ -723,27 +710,31 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     public int Efectos(int efecto) {
         switch (efecto)
         {
-            case 1:
+            case 4:
                 System.out.println("Estas regenerando vida");
                 nuevoPersonaje.setEstado("Regenerar");
                 break;
 
-            case 2:
+            case 1:
                 System.out.println("¡Has sido ralentizado! ");
                 nuevoPersonaje.setEstado("Ralentizado");
                 nuevoPersonaje.setVelocidad(nuevoPersonaje.getVelocidad()/2);
+                break;
 
-            case 3:
+            case 2:
                 System.out.println("¡Te han vampirificado! ");
                 nuevoPersonaje.setEstado("Vampirismo");
+                break;
 
-            case 4:
+            case 3:
                 System.out.println("¡Te han hecho sangrar! ");
                 nuevoPersonaje.setEstado("Sangrando");
+                break;
 
             case 5:
                 System.out.println("Vuelves a la normalidad");
                 nuevoPersonaje.setEstado("Normal");
+                break;
 
         }
 
