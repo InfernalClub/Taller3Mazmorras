@@ -390,13 +390,16 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
                     switch (opcion) {
                         case 1:
-                            calculoFinal(1);
+                            calculoFinal(1, enemigos);
+                            break;
 
                         case 2:
-                            calculoFinal(2);
+                            calculoFinal(2, enemigos);
+                            break;
 
                         case 3:
-                            calculoFinal(3);
+                            calculoFinal(3, enemigos);
+                            break;
 
                         default:
                             StdOut.println("Error, ingrese una opcion correcta");
@@ -443,12 +446,12 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
      * Metodo que calcular los danios que nuestro personaje le hace a los enemigos
      * @param opcion es lo que el usuario ingresa a la hora de combatir
      */
-    public void calculoFinal(int opcion)
+    public void calculoFinal(int opcion, int pos)
     {
         switch (opcion)
         {
             case 1:
-
+            System.out.println("Atacas a tu enemigo! ");
             int danio = nuevoPersonaje.getAtaque();
             int vidaEnemigo = ListaEnemigos.get(0).getVida() - danio;
             if (vidaEnemigo <= 0)
@@ -459,7 +462,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     break;
                 }
             ListaEnemigos.get(0).setVida(vidaEnemigo);
-            calculoFinalEnemigo(RandomizerEnemigo());
+            calculoFinalEnemigo(RandomizerEnemigo(), pos );
 
 
 
@@ -472,10 +475,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     FinalDungeons();
                     break;
                 }
-                calculoFinalEnemigo(RandomizerEnemigo());
+                calculoFinalEnemigo(RandomizerEnemigo(), pos);
 
             case 3:
-                calculoFinalEnemigo(0);
+                calculoFinalEnemigo(0, pos);
                 break;
         }
 
@@ -486,14 +489,15 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
      * Metodo que calcular los danios que el enemigo le hace al personaje
      * @param opcion es lo que hara el enemigo 
      */
-    public void calculoFinalEnemigo(int opcion)
+    public void calculoFinalEnemigo(int opcion, int pos)
     {
         switch (opcion)
         {
             case 0:
                 System.out.println("El enemigo ataco pero no pudo romper tus defensas! ");
             case 1:
-                int danio = AtacarEnemigo();
+                System.out.println("El enemigo te ataca! ");
+                int danio = ListaEnemigos.get(pos).getAtaque();
                 int vidaJugador = nuevoPersonaje.getVida() - danio;
                 if (vidaJugador <= 0)
                 {
@@ -501,7 +505,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     Salir();
                     break;
                 }
-                Batalla(3);
+                nuevoPersonaje.setVida(vidaJugador);
+                Batalla(pos);
 
 
 
@@ -514,11 +519,12 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     Salir();
                     break;
                 }
-                Batalla(3);
+
+                Batalla(pos);
 
             case 3:
                 System.out.println("Él enemigo desvio tu ataque");
-                Batalla(3);
+                Batalla(pos);
         }
 
 
@@ -753,22 +759,22 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         return randomNumber;
     }
 
-    public static boolean sobrevivirNPC(int randomNumber)
+    public static boolean sobrevivirNPC(int cantEnemigos)
     {
         boolean NPC = false;
         int chanceSobrevivir = ThreadLocalRandom.current().nextInt(1,21);
-        if (randomNumber == 0)
+        if (cantEnemigos == 0)
         {
             NPC = true;
         }
-        if (randomNumber == 1)
+        if (cantEnemigos == 1)
             if(chanceSobrevivir >=18)
             {
                 NPC = false;
             }
             else {NPC = true;}
 
-        else if (randomNumber == 2)
+        else if (cantEnemigos == 2)
         {
             if(chanceSobrevivir >= 14)
             {
