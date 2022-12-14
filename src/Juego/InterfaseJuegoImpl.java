@@ -41,6 +41,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     int vidaOriginal;
 
     int extraXP;
+
+    int contador = 0;
+
+    int velocidadOriginal;
     /**
      * Lista que almacena los nombres de los enemigos
      */
@@ -376,6 +380,42 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     public void Batalla(int enemigos)
     {
         boolean batallando = true;
+
+        if (!nuevoPersonaje.getEstado().equalsIgnoreCase("Normal") )
+        {
+            if (contador < 3)
+            {
+                if (nuevoPersonaje.getEstado().equalsIgnoreCase("vAMPIRISMO"))
+                {
+                    nuevoPersonaje.setVida(nuevoPersonaje.getVida() - 5);
+                    ListaEnemigos.get(enemigos).setVida(ListaEnemigos.get(enemigos).getVida() + 5);
+                    contador++;
+                }
+                if (nuevoPersonaje.getEstado().equalsIgnoreCase("Sangrando")) {
+                    nuevoPersonaje.setVida(nuevoPersonaje.getVida() - 5);
+                    contador++;
+                }
+                if (nuevoPersonaje.getEstado().equalsIgnoreCase("Regeneracion"))
+                {
+                    nuevoPersonaje.setVida(nuevoPersonaje.getVida() + 5);
+                    contador++;
+                }
+                if (nuevoPersonaje.getEstado().equalsIgnoreCase("Ralentizado"))
+                {
+                    nuevoPersonaje.setVelocidad(nuevoPersonaje.getVelocidad()/2);
+                    contador++;
+                }
+            }
+            else
+            {
+                contador = 0;
+                if (nuevoPersonaje.getEstado().equalsIgnoreCase("Ralentizado"))
+                {
+                    nuevoPersonaje.setVelocidad(velocidadOriginal);
+                }
+                nuevoPersonaje.setEstado("Normal");
+            }
+        }
 
         System.out.println("¡Te haz encontrado "+cantTempEne+" enemigo/s, preparate!");
             while (batallando) {
@@ -717,8 +757,8 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
             case 1:
                 System.out.println("¡Has sido ralentizado! ");
+                velocidadOriginal = nuevoPersonaje.getVelocidad();
                 nuevoPersonaje.setEstado("Ralentizado");
-                nuevoPersonaje.setVelocidad(nuevoPersonaje.getVelocidad()/2);
                 break;
 
             case 2:
@@ -728,7 +768,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
             case 3:
                 System.out.println("¡Te han hecho sangrar! ");
-                nuevoPersonaje.setEstado("Sangrando");
+                nuevoPersonaje.setEstado("Sangrado");
                 break;
 
             case 5:
