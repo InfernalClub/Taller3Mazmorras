@@ -44,14 +44,13 @@ public interface InterfaseJuego {
      * AtacarEnemigo es un metodo del enemigo que le permite quitar puntos de vida al personaje
      */
     int AtacarEnemigo();
-    /**
-     * AtaqueEspecialPersonaje es un metodo que le permite al personaje ocupar su habilidad especial
-     */
-    void AtaqueEspecialPersonaje();
+
     /**
      * AtaqueEspecialEnemigo es un metodo que le permite al enemigo ocupar su habilidad especial
      */
-    int AtaqueEspecialEnemigo(int enemigo);
+
+    void AtaqueEspecialEnemigo(int pos);
+
     /**
      * Efectos es un metodo que guarda los multiples efectos de los enemigos y de los personajes
      */
