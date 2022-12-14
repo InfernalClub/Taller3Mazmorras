@@ -370,7 +370,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         System.out.println("¡Te haz encontrado "+cantEnemigos+" enemigo/s, preparate!");
             while (batallando) {
 
-                    //
+                    // Menu que presenta por pantalla las estadisticas de los enemigos
                     System.out.println("*****ENEMIGO*****");
                     System.out.println("[*] Tipo: " + tipoEnemigos.get(RandomizerEnemigo()));
                     System.out.println("[*] Nivel:  " + ListaEnemigos.get(enemigos).getNivel() + " " + nombresEnemigos.get(RandomizerDescripcionesYNombres()) + " " + descripcionesEnemigos.get(RandomizerDescripcionesYNombres()));
@@ -379,7 +379,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     System.out.println(" ");
                     System.out.println(" ");
 
-                    //
+                    // Menu que presenta por pantalla las estadisticas del personaje
                     System.out.println("*****TU*****");
                     System.out.println("[*] Nivel: " + nuevoPersonaje.getNivel() + " " + nuevoPersonaje.getNombre() + " " + nuevoPersonaje.getDescripcion());
                     System.out.println("[*] Vida: " + nuevoPersonaje.getVida());
@@ -387,7 +387,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                     System.out.println(" ");
                     System.out.println(" ");
 
-                    //
+                    // Dependiendo de la velocidad del personaje y del enemigo, determina quien pelea primero
                 if (nuevoPersonaje.getVelocidad() > ListaEnemigos.get(enemigos).getVelocidad()) {
                     StdOut.println("¿Que deseas hacer?");
                     System.out.println("[1] Atacar");
@@ -551,6 +551,9 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     }
 
+    /**
+     * VerPersonaje permite observar las estadisticas del personaje
+     */
     @Override
     public void VerPersonaje() {
         StdOut.println("--------------->FINAL DUNGEONS<--------------");
@@ -571,6 +574,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         FinalDungeons();
     }
 
+    /**
+     * Permite al personaje interactuar con el NPC, el cual otorga experiencia a la hora de encontrarlo
+     * @param NPC este varia dependiendo de la cantidad de enemigos y del porcentaje de aparicion
+     */
     @Override
     public void InteractuarNPC(boolean NPC)
     {
@@ -599,9 +606,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     }
 
 
-
-
-
+    /**
+     * Este metodo sirve para los calculos del danio dependiendo de la clase que escogio el usuario y del enemigo que esta
+     * combatiendo
+     */
     @Override
     public void AtacarPersonaje() {
 
@@ -630,6 +638,10 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     }
 
+    /**
+     * Este metodo realiza el calculo de danio que nos hace el enemigo en combate
+     * @return el valor de danio que nos hizo el enemigo
+     */
     @Override
     public int AtacarEnemigo() {
         int vidaPersonaje = 0;
@@ -637,6 +649,9 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         return vidaPersonaje;
     }
 
+    /**
+     * Este metodo sirve para realizar los calculos dependiendo de la clase escogida por el usuario
+     */
     @Override
     public void AtaqueEspecialPersonaje() {
 
@@ -653,6 +668,12 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     }
 
+    /**
+     *  AtaqueEspecialEnemigo determina que tipo de habilidad se le determina a un enemigo dependiendo del tipo
+     *  al igual que el efecto que realizan sobre el personaje
+     * @param enemigo
+     * @return
+     */
     @Override
     public int AtaqueEspecialEnemigo(int enemigo) {
         String SP = ListaEnemigos.get(0).getAtaqueEspecial();
@@ -674,6 +695,11 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         return 0;
     }
 
+    /**
+     * Metodo que guarda los efectos que puede sufri o aplicarse el personaje en el combate
+     * @param efecto depende de si un enemigo lo ocupa o si la clase del mago ocupa su habilidad
+     * @return el efecto aplicado
+     */
     @Override
     public int Efectos(int efecto) {
         switch (efecto)
@@ -706,13 +732,18 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
     }
 
 
-
-
+    /**
+     * Metodo que nos permite salir de la aplicacion
+     */
     @Override
     public void Salir() {
         System.exit(2);
     }
 
+    /**
+     * Metodo que permite al personaje subir de nivel cumpliendo con los requerimientos para
+     * poder subir de nivel al igual que multiplicar las estadisticas del personaje
+     */
     public void SubirDeNivel()
     {
         nuevoPersonaje.setNivel(nuevoPersonaje.getNivel()+1);
@@ -741,7 +772,9 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         }
     }
 
-
+    /**
+     * Metodo que verifica el cumplimiento de los requerimientos a la hora de subir el nivel del personaje
+     */
     public void levelUP()
     {
         if (nuevoPersonaje.getExperiencia() >= 300 && nuevoPersonaje.getNivel() == 1){SubirDeNivel();}
@@ -763,24 +796,41 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         return true;
     }
 
+    /**
+     * Metodo que nos da de manera aleatoria un numero
+     * @return nos da un numero del 0 al 3
+     */
     public static int Randomizer()
     {
         int randomNumber = ThreadLocalRandom.current().nextInt(0,   4);
         return randomNumber;
     }
 
+    /**
+     * Metodo que nos da de manera aleatoria un numero para la seleccion de un enemigo al azar
+     * @return nos da un numero del 0 al 2
+     */
     public int RandomizerEnemigo()
     {
         int randomNumber = ThreadLocalRandom.current().nextInt(0,   3);
         return randomNumber;
     }
 
+    /**
+     * Metodo que sirve para determinar un nombre y una descripcion  al azar
+     * @return un numero desde el 0 al 5
+     */
     public static int RandomizerDescripcionesYNombres()
     {
         int randomNumber = ThreadLocalRandom.current().nextInt(0,   6);
         return randomNumber;
     }
 
+    /**
+     * Metodo que verifica si nuestro personaje se puede encontrar con el NPC
+     * @param cantEnemigos valor que se utiliza para determinar la probabilidad de aparicion del NPC
+     * @return true si nos encontramos al NPC y False sino
+     */
     public static boolean sobrevivirNPC(int cantEnemigos)
     {
         boolean NPC = false;
