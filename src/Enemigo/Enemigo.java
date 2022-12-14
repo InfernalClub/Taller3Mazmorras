@@ -14,8 +14,9 @@ public class Enemigo  {
     private int Experiencia;
     private String Estado;
     private String AtaqueEspecial;
+    private String Tipo;
 
-    public Enemigo(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, String estado, String AtaqueEspecial) {
+    public Enemigo(String nombre, String descripcion, int nivel, int vida, int ataque, int defensa, int velocidad, int experiencia, String estado, String AtaqueEspecial,String tipo) {
         Nombre = nombre;
         Descripcion = descripcion;
         Nivel = 1;
@@ -25,7 +26,7 @@ public class Enemigo  {
         Velocidad = 25;
         Experiencia = 100;
         Estado = "Normal";
-
+        Tipo = tipo;
     }
 
     public String getNombre() {
@@ -103,5 +104,17 @@ public class Enemigo  {
 
     public int getExperiencia() {
         return Experiencia;
+    }
+
+    public void setExperiencia(int experiencia) {
+        Experiencia = experiencia;
+    }
+
+    public String getTipo() {
+        return Tipo;
+    }
+
+    public void setTipo(String tipo) {
+        Tipo = tipo;
     }
 }

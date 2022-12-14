@@ -29,6 +29,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     List<String> nombresEnemigos = new ArrayList<>();
     List<String> descripcionesEnemigos = new ArrayList<>();
+    List<String> tipoEnemigos = new ArrayList<>();
     List<Enemigo> ListaEnemigos = new ArrayList<>();
 
 
@@ -233,19 +234,19 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
 
                 case 1:
-                    StdOut.println(enemigos);
+
                     Batalla(1);
 
 
 
                 case 2:
-                    StdOut.println(enemigos);
+
                     Batalla(2);
 
 
 
                 case 3:
-                    StdOut.println(enemigos);
+
                     Batalla(3);
 
 
@@ -273,19 +274,26 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         descripcionesEnemigos.add(4,"El Feroz");
         descripcionesEnemigos.add(5,"El Dios");
 
-        Enemigo Zombie = new Enemigo(nombresEnemigos.get(RandomizerDescripcionesYNombres()),descripcionesEnemigos.get(RandomizerDescripcionesYNombres()),1,110,25,10,25,100,"Normal","Relentizar");
-        Enemigo HombreLobo = new Enemigo(nombresEnemigos.get(RandomizerDescripcionesYNombres()),descripcionesEnemigos.get(RandomizerDescripcionesYNombres()),1,110,25,10,25,100,"Normal","Sangrar");
-        Enemigo Vampiro = new Enemigo(nombresEnemigos.get(RandomizerDescripcionesYNombres()),descripcionesEnemigos.get(RandomizerDescripcionesYNombres()),1,110,25,10,25,100,"Normal","Araniar");
+        tipoEnemigos.add(0,"Vampiro");
+        tipoEnemigos.add(1,"Hombre Lobo");
+        tipoEnemigos.add(2,"Zombie");
+
+        Enemigo Zombie = new Enemigo(nombresEnemigos.get(RandomizerDescripcionesYNombres()),descripcionesEnemigos.get(RandomizerDescripcionesYNombres()),1,110,25,10,25,100,"Normal","Relentizar",tipoEnemigos.get(2));
+        Enemigo HombreLobo = new Enemigo(nombresEnemigos.get(RandomizerDescripcionesYNombres()),descripcionesEnemigos.get(RandomizerDescripcionesYNombres()),1,110,25,10,25,100,"Normal","Sangrar",tipoEnemigos.get(0));
+        Enemigo Vampiro = new Enemigo(nombresEnemigos.get(RandomizerDescripcionesYNombres()),descripcionesEnemigos.get(RandomizerDescripcionesYNombres()),1,110,25,10,25,100,"Normal","Araniar",tipoEnemigos.get(1));
 
 
         ListaEnemigos.add(Zombie);
         ListaEnemigos.add(HombreLobo);
         ListaEnemigos.add(Vampiro);
 
-        System.out.println("Te haz encontrado a un enemigo! ");
+        int rand = RandomizerEnemigo();
 
-                for (int i = 0; i < ListaEnemigos.size(); i++) {
+        System.out.println("¡Te haz encontrado "+rand+" enemigo/s, preparate!");
+
+                for (int i = 0; i < rand; i++) {
                 System.out.println("*****ENEMIGO*****");
+                System.out.println("[*] Tipo: "+tipoEnemigos.get(RandomizerEnemigo()));
                 System.out.println("[*] Nivel:  "+ListaEnemigos.get(0).getNivel()+" "+nombresEnemigos.get(RandomizerDescripcionesYNombres())+" "+descripcionesEnemigos.get(RandomizerDescripcionesYNombres()));
                 System.out.println("[*] Vida: "+ListaEnemigos.get(0).getVida());
                 System.out.println("[*] Estado:  "+ListaEnemigos.get(0).getEstado());
@@ -389,7 +397,6 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                 calculoFinalEnemigo(RandomizerEnemigo());
 
             case 3:
-                Defender();
                 calculoFinalEnemigo(0);
                 break;
         }
@@ -591,10 +598,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         return 0;
     }
 
-    @Override
-    public void Defender() {
-        StdOut.println("Te has defendido del ataque");
-    }
+
 
     @Override
     public void DefensaEnemigo() {
@@ -656,7 +660,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         return randomNumber;
     }
 
-    public static int RandomizerEnemigo()
+    public int RandomizerEnemigo()
     {
         int randomNumber = ThreadLocalRandom.current().nextInt(1,   4);
         return randomNumber;
