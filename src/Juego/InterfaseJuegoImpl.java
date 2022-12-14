@@ -539,6 +539,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
                 }
 
                 Batalla(pos);
+                break;
 
             case 3:
                 System.out.println("Él enemigo desvio tu ataque");
