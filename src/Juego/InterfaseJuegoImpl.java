@@ -33,17 +33,29 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
      * Funcion que determina si nuestro personaje esta explorando la mazmorra
      */
     boolean explorado = false;
-
+    /**
+     * Funcion que establece una cantidad de enemigos
+     */
     int cantEnemigos;
-
+    /**
+     *  Variable que sirve para guaradar temporalmente la cantidad de enemigos
+     */
     int cantTempEne;
-
+    /**
+     * Variable que guarda la vida del personaje
+     */
     int vidaOriginal;
-
+    /**
+     * Es la experiencia que otorga el encuentro con el NPC
+     */
     int extraXP;
-
+    /**
+     * Contador que sirve para aplicar los efectos durante una cantidad determinada de tiempo
+     */
     int contador = 0;
-
+    /**
+     * Variable que guarda la velocidad del jugador
+     */
     int velocidadOriginal;
     /**
      * Lista que almacena los nombres de los enemigos
@@ -625,6 +637,11 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     }
 
+    /**
+     *
+     * @param opcion
+     * @param pos
+     */
     public void turnoEnemigo(int opcion, int pos)
     {
         switch (opcion)
@@ -668,6 +685,12 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
 
     }
+
+    /**
+     *
+     * @param opcion
+     * @param pos
+     */
     public void turnoJugador(int opcion, int pos)
     {
 
@@ -700,7 +723,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
             case 2:
 
-                if (nuevoPersonaje.getAtaqueEspecial() == "Regenerar")
+                if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Regenerar"))
                 {
                     Efectos(4);
                     calculoFinalEnemigo(RandomOpcionEnemigo(), pos);
@@ -778,13 +801,14 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
         explorado = true;
 
-        if (NPC = true)
+        if (NPC)
         {
             mazmorraActual++;
 
             nuevoPersonaje.setExperiencia(nuevoPersonaje.getExperiencia()+ extraXP);
             levelUP();
-            System.out.println("Hola, no hay nadie por aca y estaba esperando a alguien");
+            System.out.println("Muchas gracias extranjero, obten esto como muestra de mi agradecimiento");
+            System.out.println("Haz obtenido "+extraXP+" de experiencia");
             FinalDungeons();
         }
 
@@ -799,62 +823,6 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
 
     }
 
-
-    /**
-     * Este metodo sirve para los calculos del danio dependiendo de la clase que escogio el usuario y del enemigo que esta
-     * combatiendo
-     */
-    @Override
-    public void AtacarPersonaje() {
-
-
-       if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Doble Ataque") && ListaEnemigos.equals("Hombre Lobo")){
-           nuevoPersonaje.setAtaque(nuevoPersonaje.getAtaque()*4);
-       }
-        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Doble Ataque") && ListaEnemigos.equals("Zombie")){
-            nuevoPersonaje.setAtaque(nuevoPersonaje.getAtaque()*2);
-        }
-
-        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Ataque Multiple") && ListaEnemigos.equals("Vampiro")){
-            nuevoPersonaje.setAtaque(nuevoPersonaje.getAtaque()*4);
-        }
-        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Ataque Multiple") && ListaEnemigos.equals("Hombre Lobo")){
-            nuevoPersonaje.setAtaque(nuevoPersonaje.getAtaque()*2);
-        }
-
-        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Regeneracion") && ListaEnemigos.equals("Zombie")){
-            nuevoPersonaje.setAtaque(nuevoPersonaje.getAtaque()*4);
-        }
-        if (nuevoPersonaje.getAtaqueEspecial().equalsIgnoreCase("Regeneracion") && ListaEnemigos.equals("Vampiro")){
-            nuevoPersonaje.setAtaque(nuevoPersonaje.getAtaque()*2);
-        }
-
-
-    }
-
-    /**
-     * Este metodo realiza el calculo de danio que nos hace el enemigo en combate
-     * @return el valor de danio que nos hizo el enemigo
-     */
-    @Override
-    public int AtacarEnemigo() {
-        int vidaPersonaje = 0;
-        vidaPersonaje = vidaPersonaje - (ListaEnemigos.get(0).getAtaque()-nuevoPersonaje.getDefensa());
-        return vidaPersonaje;
-    }
-
-    /**
-     * Este metodo sirve para realizar los calculos dependiendo de la clase escogida por el usuario
-     */
-
-
-
-    /**
-     *  AtaqueEspecialEnemigo determina que tipo de habilidad se le determina a un enemigo dependiendo del tipo
-     *  al igual que el efecto que realizan sobre el personaje
-     * @param enemigo
-     * @return
-     */
 
 
     /**

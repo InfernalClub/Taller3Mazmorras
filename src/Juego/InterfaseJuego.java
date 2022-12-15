@@ -36,22 +36,11 @@ public interface InterfaseJuego {
      * Metodo del sistema que verifica si el NPC esta vivo o muerto
      */
     void InteractuarNPC(boolean NPC); // NPC es la caracteristica que determina en base al azar si nuestro NPC esta vivo o no
-    /**
-     * AtacarPersonaje es un metodo de nuestro personaje que permite quitar puntos de la vida de un enemigo
-     */
-    void AtacarPersonaje();
-    /**
-     * AtacarEnemigo es un metodo del enemigo que le permite quitar puntos de vida al personaje
-     */
-    int AtacarEnemigo();
 
     /**
-     * AtaqueEspecialEnemigo es un metodo que le permite al enemigo ocupar su habilidad especial
-     */
-
-
-    /**
-     * Efectos es un metodo que guarda los multiples efectos de los enemigos y de los personajes
+     * Metodo que determina los efectos que pueden emplear el personaje y los enemigos
+     * @param efecto va dependiendo del tipo de enemigo y de la clase escogida por el usuario
+     * @return la habilidad respectiva del personaje o el enemigo
      */
     int Efectos(int efecto);
 
