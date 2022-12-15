@@ -857,9 +857,7 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         }
 
     }
-
-
-
+    
     /**
      * Metodo que guarda los efectos que puede sufri o aplicarse el personaje en el combate
      * @param efecto depende de si un enemigo lo ocupa o si la clase del mago ocupa su habilidad
