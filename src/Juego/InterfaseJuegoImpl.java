@@ -190,44 +190,49 @@ public class InterfaseJuegoImpl implements InterfaseJuego {
         StdOut.println("");
         StdOut.println("[*] CREACION DE PERSONAJE [*]");
         StdOut.println("");
-        StdOut.println(" ESCOJA UNA CLASE: (Escriba la clase que desea ocupar)");
-        StdOut.println("Espadachin");
-        StdOut.println("Arquero");
-        StdOut.println("Mago");
-        String claseEscogida = StdIn.readString();
-
-        // Si los caracteres ingresados se parecen a Espadachin obtiene la habilidad de Ataque Doble
-        if (claseEscogida.equalsIgnoreCase("Espadachin")){
-            nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Ataque Doble");
-            nuevaClase.add(nuevoPersonaje);
-            StdOut.println("Personaje Creado, ¡que comienze la aventura!");
-            FinalDungeons();
-        }
-        // Si los caracteres ingresados se parecen a Arquero obtiene la habilidad de Ataque Multiple
-        if (claseEscogida.equalsIgnoreCase("Arquero")){
-            nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Ataque Multiple");
-            nuevaClase.add(nuevoPersonaje);
-            StdOut.println("Personaje Creado, ¡que comienze la aventura!");
-            FinalDungeons();
-        }
-        // Si los caracteres ingresados se parecen a Mago obtiene la habilidad de Regeneracion
-        if (claseEscogida.equalsIgnoreCase("Mago")){
-            nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Regenerar");
-            nuevaClase.add(nuevoPersonaje);
-            StdOut.println("Personaje Creado, ¡que comienze la aventura!");
-            FinalDungeons();
-        }
-        // Esto ocurre si es que no se ingresa lo que se pidio por pantalla
-        else
+        StdOut.println(" ESCOJA UNA CLASE:");
+        StdOut.println("[1] Espadachin");
+        StdOut.println("[2] Arquero");
+        StdOut.println("[3] Mago");
+        try
         {
-            StdOut.println("Error, ingrese una opcion correcta");
+            String opcion = StdIn.readLine();
+            int decision;
+            if (isNumeric(opcion)) Integer.parseInt(opcion);
+            decision = Integer.parseInt(opcion);
+            switch (decision)
+            {
+                case 1: // Si el caracter ingresado es 1 obtiene la habilidad de Ataque Doble
+                    nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Ataque Doble");
+                    nuevaClase.add(nuevoPersonaje);
+                    StdOut.println("Personaje Creado, ¡que comienze la aventura!");
+                    FinalDungeons();
+
+                case 2: // Si el caracter ingresado es 2 obtiene la habilidad de Ataque Multiple
+                    nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Ataque Multiple");
+                    nuevaClase.add(nuevoPersonaje);
+                    StdOut.println("Personaje Creado, ¡que comienze la aventura!");
+                    FinalDungeons();
+
+                case 3: // Si el caracter ingresado es 3 obtiene la habilidad de Regeneracion
+                    nuevoPersonaje = new Personaje(nombrePersonaje,descripcionPersonaje,1,100,20,10,17,0,"Normal","Regenerar");
+                    nuevaClase.add(nuevoPersonaje);
+                    StdOut.println("Personaje Creado, ¡que comienze la aventura!");
+                    FinalDungeons();
+
+
+                default:
+                    StdOut.println("Ingrese una opcion de la lista de personajes: ");
+                    CreacionPersonaje();
+
+
+            }
+
+        }
+        catch (Exception e) {
+            StdOut.println("Ingrese una opción válida.");
             CreacionPersonaje();
         }
-
-
-
-
-
     }
 
     /**
